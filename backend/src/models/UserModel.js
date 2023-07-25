@@ -115,11 +115,16 @@ class User {
 
   // Metodos Static
   static async allUser() {
-    return UserModel.findAll();
+    const users = await UserModel.findAll();
+    if(!(users.length != 0)) throw new Error('Não existe nenhum usuário criado no sistema.');
+    return users;
   }
 
   static async findUser(id) {
-    return UserModel.findByPk(id);
+    const user = await UserModel.findByPk(id);
+    if(!user) throw new Error('Não existe nenhum usuário atrelado a este ID.');
+
+    return user;
   }
 
   static async deleteUser(id) {
