@@ -43,7 +43,7 @@ class Etapa {
   }
 
   async update(id) {
-    this.etapa = await EtapaModel.findOne({ where: id });
+    this.etapa = await EtapaModel.findOne({ where: { id } });
 
     if(!this.etapa) throw new Error('Não foi encontrada nenhuma etapa atrelada a este ID.');
 
@@ -57,7 +57,7 @@ class Etapa {
   }
 
   async delete(id) {
-    const etapaDel = await EtapaModel.findOne({ where: id });
+    const etapaDel = await EtapaModel.findOne({ where: { id } });
 
     if(!etapaDel) throw new Error('Não foi encontrada nenhuma etapa atrelada a este ID.');
 
