@@ -1,34 +1,4 @@
-const { Sequelize } = require('sequelize');
-
-const database = require('../../db');
-
-const EtapaModel = database.define('etapa', {
-  id: {
-    primaryKey: true,
-    allowNull: false,
-    autoIncrement: true,
-    type: Sequelize.INTEGER
-  },
-  nome: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  dataInicio: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  dataFim: {
-    type: Sequelize.STRING, 
-    allowNull: false
-  },
-  dataInicioReal: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  dataEntrega: {
-    type: Sequelize.STRING
-  }
-});
+const { EtapaModel } = require('./migrations');
 
 class Etapa {
   constructor(body){

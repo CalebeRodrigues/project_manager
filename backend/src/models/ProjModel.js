@@ -1,27 +1,4 @@
-const { Sequelize } = require('sequelize');
-
-const database = require('../../db');
-
-const ProjModel = database.define('proj', {
-  id: {
-    primaryKey: true,
-    allowNull: false,
-    autoIncrement: true,
-    type: Sequelize.INTEGER
-  },
-  nome: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  descricao: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  status: {
-    type: Sequelize.STRING, 
-    allowNull: false
-  }
-});
+const { ProjModel } = require('./migrations');
 
 class Proj {
   constructor(body){

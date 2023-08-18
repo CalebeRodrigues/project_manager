@@ -6,6 +6,7 @@ const ProjController = require('./src/controllers/ProjController');
 const EtapaController = require('./src/controllers/EtapaController');
 const AuthController = require('./src/controllers/AuthController');
 const ActivityController = require('./src/controllers/ActivityController');
+const MemberController = require('./src/controllers/MemberController');
 
 route.get('/', (req, res) => {
   res.status(200).send('API for project TCC (Manager project)');
@@ -62,5 +63,8 @@ route.post('/activity/create', ActivityController.create);
 route.put('/activity/update/:id', ActivityController.update);
 
 route.delete('/activity/delete/:id', ActivityController.delete); 
+
+// Members
+route.get('/members/:proj', MemberController.findAll);
 
 module.exports = route;

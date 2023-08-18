@@ -1,43 +1,4 @@
-const { Sequelize } = require('sequelize');
-
-const database = require('../../db');
-
-const ActivityModel = database.define('activity', {
-  id: {
-    primaryKey: true,
-    allowNull: false,
-    autoIncrement: true,
-    type: Sequelize.INTEGER
-  },
-  nome: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  descricao: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  dataInicio: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  dataFim: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  status: {
-    type: Sequelize.STRING, 
-    allowNull: false
-  },
-  dataInicioReal: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  dataEntrega: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-});
+const { ActivityModel } = require('./migrations');
 
 class Activity {
   constructor(body){

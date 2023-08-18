@@ -1,34 +1,12 @@
-const { Sequelize } = require('sequelize');
+const { UserModel } = require('./migrations');
 const bcryptjs = require('bcryptjs');
 
 const validator = require('validator');
 
-const database = require('../../db');
-
-const UserModel = database.define('user', {
-  id: {
-    primaryKey: true,
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    allowNull: false
-  },
-  nome: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  senha: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  }
-});
-
 class User {
   constructor(body) {
     this.body = body;
+    this.user = null;
   }
 
   async register() {
@@ -139,4 +117,3 @@ class User {
 }
 
 module.exports.User = User;
-module.exports.UserModel = UserModel;

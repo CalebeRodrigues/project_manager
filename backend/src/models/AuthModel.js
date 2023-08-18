@@ -1,23 +1,4 @@
-const { Sequelize } = require('sequelize');
-
-const database = require('../../db');
-
-const AuthModel = database.define('auth_code', {
-  id: {
-    primaryKey: true,
-    allowNull: false,
-    autoIncrement: true,
-    type: Sequelize.INTEGER
-  },
-  nome: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  descricao: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
-});
+const { AuthModel } = require('./migrations');
 
 class Auth {
   constructor(body){
