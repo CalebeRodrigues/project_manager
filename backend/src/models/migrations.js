@@ -127,6 +127,36 @@ const EtapaModel = database.define('etapa', {
   }
 });
 
+const PerfilModel = database.define('perfil_acess', {
+  id: {
+    primaryKey: true,
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false
+  },
+  nome: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
+const AcessModel = database.define('acess', {
+  id: {
+    primaryKey: true,
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: false
+  },
+  idPerfil: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  idAuthCode: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  }
+});
+
 const MemberModel = database.define('member', {
   id: {
     primaryKey: true,
@@ -154,9 +184,26 @@ MemberModel.belongsTo(ProjModel, {
   allowNull: false
 });
 
+PerfilModel.hasMany(AcessModel, {
+  foreignKey: 'idPerfil',
+  allowNull: false
+});
+
+AcessModel.belongsTo(PerfilModel, {
+  foreignKey: 'idPerfil',
+  allowNull: false
+});
+  
+AcessModel.belongsTo(AuthModel, {
+  foreignKey: 'idAuthCode',
+  allowNull: false
+});
+
 exports.ActivityModel = ActivityModel;
 exports.AuthModel = AuthModel;
 exports.EtapaModel = EtapaModel;
 exports.MemberModel = MemberModel;
 exports.ProjModel = ProjModel;
 exports.UserModel = UserModel;
+exports.PerfilModel = PerfilModel;
+exports.AcessModel = AcessModel;
