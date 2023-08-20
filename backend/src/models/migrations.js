@@ -171,6 +171,10 @@ const MemberModel = database.define('member', {
   idProj: {
     type: Sequelize.INTEGER,
     allowNull: false
+  },
+  idPerfil: {
+    type: Sequelize.INTEGER,
+    allowNull: false
   }
 });
 

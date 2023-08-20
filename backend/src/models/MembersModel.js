@@ -1,4 +1,4 @@
-const { MemberModel, UserModel, ProjModel } = require('./migrations');
+const { MemberModel, UserModel, ProjModel, PerfilModel } = require('./migrations');
 
 class Member {
   constructor(body) {
@@ -28,7 +28,7 @@ class Member {
 
   // Metodos Static
   static async all() {
-    return MemberModel.findAll({ include: [UserModel, ProjModel] });
+    return MemberModel.findAll({ include: [UserModel, ProjModel, PerfilModel] });
   }
 }
 
