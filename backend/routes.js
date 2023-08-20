@@ -68,6 +68,11 @@ route.delete('/activity/delete/:id', ActivityController.delete);
 // Members
 route.get('/members/:proj', MemberController.findAll);
 
+route.post('/members/insert/:idUser/:idProj/:idPerfil', MemberController.insert);
+route.put('/members/update/:id/:idPerfil', MemberController.update);
+
+// route.delete('/members')
+
 route.get('/perfil_acess/', PerfilController.findAll);
 route.get('/perfil_acess/:id', PerfilController.findOne);
 

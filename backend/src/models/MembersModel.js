@@ -1,14 +1,39 @@
 const { MemberModel, UserModel, ProjModel, PerfilModel } = require('./migrations');
 
 class Member {
-  constructor(body) {
-    this.body = body;
-    this.member = null;
+
+  static async insert(idUser, idProj, idPerfil) {
+    const proj = await ProjModel.findByPk(idProj);
+    if(!proj) throw new Error('Não existe nenhum projeto atrelado a este ID.');
+
+    const perfil = await PerfilModel.findByPk(idPerfil);
+    if(!perfil) throw new Error('Não existe nenhum perfil de acesso atrelado a este ID.');
+
+    const user = await UserModel.findByPk(idUser);
+    if(!user) throw new Error('Não existe nenhum usuário atrelado a este ID.');
+    
+    return await MemberModel.create({
+      idUser,
+      idProj,
+      idPerfil
+    });
   }
 
-  //   async update(id) {
+  static async update(id, idPerfil) {
+    const member = await MemberModel.findByPk(id);
+    if(!member) throw new Error('Não foi encontrado nenhum membro atrelado a este usuário.');
 
-  //   }
+    if (member.idPerfil == idPerfil) return member;
+
+    const perfil = await PerfilModel.findByPk(idPerfil);
+    if(!perfil) throw new Error('Não existe nenhum perfil de acesso atrelado a este ID.');
+
+    await member.update({
+      idPerfil
+    });
+
+    return member;
+  }
   
   //   // Garante que tudo que vier no formulário seja uma string
   //   cleanUp() {

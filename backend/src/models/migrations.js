@@ -188,6 +188,11 @@ MemberModel.belongsTo(ProjModel, {
   allowNull: false
 });
 
+MemberModel.belongsTo(PerfilModel, {
+  foreignKey: 'idPerfil',
+  allowNull: false
+});
+
 PerfilModel.hasMany(AcessModel, {
   foreignKey: 'idPerfil',
   allowNull: false
