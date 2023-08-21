@@ -1,0 +1,20 @@
+.cadastro-card {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #f8f9fa; /* Light Gray color */
+}
+
+.cadastro-card .card-title {
+  margin-bottom: 20px;
+}
+
+.cadastro-card button.btn-primary {
+  background-color: #007bff; /* Blue color */
+  border-color: #007bff;
+}
+
+.cadastro-card button.btn-primary:hover {
+  background-color: #0056b3; /* Darker blue color on hover */
+  border-color: #0056b3;
+}
