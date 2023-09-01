@@ -4,6 +4,7 @@ import { App } from '../templates/App';
 import { Login } from '../templates/Login';
 import { Cadastro } from '../templates/Cadastro';
 import { Navbar } from '../components/Navbar';
+import { Project } from '../templates/Project';
 
 export const Router = () => {
   return (
@@ -13,6 +14,7 @@ export const Router = () => {
         <Route path="/" element={<App />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/proj/:id" element={<Project />} />
       </Routes>
     </BrowserRouter>
   );
