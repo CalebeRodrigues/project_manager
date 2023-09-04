@@ -14,7 +14,7 @@ const projects = [
 
 const ProjectList = () => {
   return (
-    <div className="container mt-4">
+    <div className="container mt-2">
       <h1>Lista de Projetos</h1>
       <div className="row">
         {projects.map((project) => (

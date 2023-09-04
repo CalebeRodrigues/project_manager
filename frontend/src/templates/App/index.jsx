@@ -3,7 +3,7 @@ import './styles.css';
 
 export const App = () => {
   return (
-    <div style={{ marginTop: '70px' }}>
+    <div>
       <ProjectList />
     </div>
   );

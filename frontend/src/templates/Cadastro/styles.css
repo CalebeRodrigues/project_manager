@@ -18,3 +18,7 @@
   background-color: #0056b3; /* Darker blue color on hover */
   border-color: #0056b3;
 }
+
+.cadastro-input-error {
+  border: 2px solid red;
+}

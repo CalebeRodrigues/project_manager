@@ -31,7 +31,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container" style={{ marginTop: '120px' }}>
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card login-card">
