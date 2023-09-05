@@ -1,11 +1,16 @@
 import { useParams } from 'react-router-dom';
+import { GanttChart } from '../../components/GanttChart';
 
 export const Project = () => {
   const params = useParams();
 
   return (
-    <div style={{ marginTop: '70px' }}>
-      <h1>Projeto page {params.id}</h1>
+    <div className="container" style={{ marginTop: '70px' }}>
+      <h3>Projeto page {params.id}</h3>
+      <br />
+      <br />
+      <GanttChart />
+      <h3>Atividades</h3>
     </div>
   );
 };
