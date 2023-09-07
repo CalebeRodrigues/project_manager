@@ -1,5 +1,5 @@
-import React from 'react';
-import { CardProject } from '../CardProject';
+import React, { useEffect, useState } from 'react';
+import { CardProject, CardsProjectLoading } from '../CardProject';
 
 const projects = [
   { id: 1, title: 'Projeto 1', description: 'Descrição do Projeto 1' },
@@ -13,13 +13,23 @@ const projects = [
 ];
 
 const ProjectList = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading((v) => !v);
+    }, 1000);
+  }, []);
+
   return (
     <div className="container mt-2">
       <h1>Lista de Projetos</h1>
       <div className="row">
-        {projects.map((project) => (
-          <CardProject key={project.id} option={project} />
-        ))}
+        {loading ? (
+          <CardsProjectLoading />
+        ) : (
+          projects.map((project) => <CardProject key={project.id} option={project} />)
+        )}
       </div>
     </div>
   );
