@@ -23,7 +23,7 @@ export const Project = () => {
               values={{
                 id: v,
                 title: 'Teste',
-                prazo: '27/11/2023',
+                prazo: '05/09/2023',
                 responsavel: 'Calebe Rodrigues',
               }}
             />

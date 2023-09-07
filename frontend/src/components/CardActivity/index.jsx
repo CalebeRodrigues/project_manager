@@ -1,4 +1,5 @@
 import * as Styles from './style';
+import { verificarPrazo } from '../../util/date';
 
 import P from 'prop-types';
 
@@ -7,9 +8,17 @@ export const CardActivity = ({ values }) => {
 
   const textResponsavel = responsavel ? `Atribuído para: ${responsavel}` : 'Ainda não foi atribuida';
 
+  const statusDiv = verificarPrazo(prazo);
+
   return (
-    <Styles.Container>
-      {id % 2 === 0 ? <Styles.DivYellow></Styles.DivYellow> : <Styles.DivGreen></Styles.DivGreen>}
+    <Styles.Container key={id}>
+      {statusDiv === 0 ? (
+        <Styles.DivYellow></Styles.DivYellow>
+      ) : statusDiv === 1 ? (
+        <Styles.DivGreen></Styles.DivGreen>
+      ) : (
+        <Styles.DivRed></Styles.DivRed>
+      )}
       <Styles.Title>
         {id} {title}
       </Styles.Title>
