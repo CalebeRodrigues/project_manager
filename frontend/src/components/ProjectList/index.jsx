@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { CardProject, CardsProjectLoading } from '../CardProject';
 
 const projects = [
@@ -13,13 +13,8 @@ const projects = [
 ];
 
 const ProjectList = () => {
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading((v) => !v);
-    }, 1000);
-  }, []);
+  // eslint-disable-next-line
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className="container mt-2">

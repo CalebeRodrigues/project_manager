@@ -59,6 +59,17 @@ export const Navbar = () => {
                     Minhas Atividades
                   </Link>
                 </li>
+
+                <li className="nav-item">
+                  <Link className="nav-link" to="/login">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/cadastro">
+                    Cadastro
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <Link className="nav-link" onClick={handleClickLogout}>
                     {/* <img src={logout} alt="" className="img-fluid pl-4" /> */}
