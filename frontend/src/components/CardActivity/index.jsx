@@ -24,9 +24,7 @@ export const CardActivity = ({ values }) => {
       ) : (
         <Styles.DivRed></Styles.DivRed>
       )}
-      <Styles.Title>
-        {id} {title}
-      </Styles.Title>
+      <Styles.Title>{title}</Styles.Title>
       <div>
         <Styles.Text>{prazo}</Styles.Text>
         <Styles.Text>{textResponsavel}</Styles.Text>
