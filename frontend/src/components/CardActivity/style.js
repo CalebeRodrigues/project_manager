@@ -5,6 +5,7 @@ export const Container = styles.div`
     border-radius: 10px;
     margin: 5px;
     padding: 6px;
+    cursor: pointer;
 `;
 
 export const Title = styles.span`
