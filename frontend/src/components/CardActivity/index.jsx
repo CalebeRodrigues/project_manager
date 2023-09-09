@@ -16,21 +16,24 @@ export const CardActivity = ({ values }) => {
   };
 
   return (
-    <Styles.Container key={id} data-bs-toggle="modal" data-bs-target={`#modal-${id}`} onClick={handleClick}>
-      {statusDiv === 0 ? (
-        <Styles.DivYellow></Styles.DivYellow>
-      ) : statusDiv === 1 ? (
-        <Styles.DivGreen></Styles.DivGreen>
-      ) : (
-        <Styles.DivRed></Styles.DivRed>
-      )}
-      <Styles.Title>{title}</Styles.Title>
-      <div>
-        <Styles.Text>{prazo}</Styles.Text>
-        <Styles.Text>{textResponsavel}</Styles.Text>
-      </div>
+    <>
+      <Styles.Container key={id} data-bs-toggle="modal" data-bs-target={`#modal-${id}`} onClick={handleClick}>
+        {statusDiv === 0 ? (
+          <Styles.DivYellow></Styles.DivYellow>
+        ) : statusDiv === 1 ? (
+          <Styles.DivGreen></Styles.DivGreen>
+        ) : (
+          <Styles.DivRed></Styles.DivRed>
+        )}
+        <Styles.Title>{title}</Styles.Title>
+        <div>
+          <Styles.Text>{prazo}</Styles.Text>
+          <Styles.Text>{textResponsavel}</Styles.Text>
+        </div>
+      </Styles.Container>
+
       <Modal options={values} />
-    </Styles.Container>
+    </>
   );
 };
 

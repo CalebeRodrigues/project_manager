@@ -12,15 +12,7 @@ export const Modal = ({ options }) => {
   const { id, title, responsavel, prazo } = options;
 
   return (
-    <div
-      id={`modal-${id}`}
-      className="modal fade"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-      tabIndex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <div id={`modal-${id}`} className="modal fade" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog modal-dialog-scrollable modal-xl">
         <div className="modal-content">
           <div className="modal-header">
@@ -42,16 +34,6 @@ export const Modal = ({ options }) => {
           <div className="modal-body">
             <div className="p-2">
               <p className="d-inline-flex gap-1">
-                <a
-                  className="btn btn-primary"
-                  data-bs-toggle="collapse"
-                  href="#collapseExample"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="collapseExample"
-                >
-                  Link with href
-                </a>
                 <button
                   className="btn btn-primary"
                   type="button"
@@ -60,15 +42,15 @@ export const Modal = ({ options }) => {
                   aria-expanded="false"
                   aria-controls="collapseExample"
                 >
-                  Button with data-bs-target
+                  Nova mensagem
                 </button>
               </p>
-              <div className="" id="collapseExample">
+              <div className="collapse" id="collapseExample">
                 <div className="card card-body">
                   <div>
                     <div className="mb-3">
                       <label htmlFor="message-text" className="col-form-label">
-                        Message:
+                        Digite sua mensagem:
                       </label>
                       <textarea className="form-control" id="message-text"></textarea>
                     </div>
