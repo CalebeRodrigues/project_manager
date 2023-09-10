@@ -44,33 +44,33 @@ export const Navbar = () => {
             </div>
             <div className="offcanvas-body">
               <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li className="nav-item">
+                <li className="nav-item" data-bs-dismiss="offcanvas">
                   <Link className="nav-link active" aria-current="page" to="/">
                     Inicio
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" data-bs-dismiss="offcanvas">
                   <Link className="nav-link" to="/projetos">
                     Projetos
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" data-bs-dismiss="offcanvas">
                   <Link className="nav-link" to="/atividades">
                     Minhas Atividades
                   </Link>
                 </li>
 
-                <li className="nav-item">
+                <li className="nav-item" data-bs-dismiss="offcanvas">
                   <Link className="nav-link" to="/login">
                     Login
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" data-bs-dismiss="offcanvas">
                   <Link className="nav-link" to="/cadastro">
                     Cadastro
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li className="nav-item" data-bs-dismiss="offcanvas">
                   <Link className="nav-link" onClick={handleClickLogout}>
                     {/* <img src={logout} alt="" className="img-fluid pl-4" /> */}
                     Sair
