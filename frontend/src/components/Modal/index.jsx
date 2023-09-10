@@ -38,14 +38,14 @@ export const Modal = ({ options }) => {
                   className="btn btn-primary"
                   type="button"
                   data-bs-toggle="collapse"
-                  data-bs-target="#collapseExample"
+                  data-bs-target={`#collapse-new-mensage${id}`}
                   aria-expanded="false"
-                  aria-controls="collapseExample"
+                  aria-controls={`#collapse-new-mensage${id}`}
                 >
                   Nova mensagem
                 </button>
               </p>
-              <div className="collapse" id="collapseExample">
+              <div className="collapse" id={`collapse-new-mensage${id}`}>
                 <div className="card card-body">
                   <div>
                     <div className="mb-3">
@@ -54,13 +54,20 @@ export const Modal = ({ options }) => {
                       </label>
                       <textarea className="form-control" id="message-text"></textarea>
                     </div>
-                    <button className="btn btn-primary w-100">Enviar</button>
+                    <button
+                      className="btn btn-primary w-100"
+                      data-bs-toggle="collapse"
+                      data-bs-target={`#collapse-new-mensage${id}`}
+                      aria-expanded="false"
+                      aria-controls={`#collapse-new-mensage${id}`}
+                      onClick={() => alert('Mensagem enviada')}
+                    >
+                      Enviar
+                    </button>
                   </div>
                 </div>
               </div>
 
-              <CardMessage />
-              <CardMessage />
               <CardMessage />
               <CardMessage />
               <CardMessage />
@@ -83,6 +90,5 @@ Modal.propTypes = {
     title: P.string.isRequired,
     responsavel: P.string,
     prazo: P.string.isRequired,
-    show: P.bool.isRequired,
   }),
 };
