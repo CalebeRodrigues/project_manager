@@ -7,9 +7,33 @@
 
 import P from 'prop-types';
 import { CardMessage } from '../CardMessage';
+import { useState } from 'react';
 
 export const Modal = ({ options }) => {
   const { id, title, responsavel, prazo } = options;
+
+  const [newMsg, setNewMsg] = useState('');
+  const [cardMsgData, setMsgCard] = useState([
+    {
+      id: 0,
+      autor: 'Pessoa',
+      conteudo: 'Mensagem de texto que a pessoa pode deixar anexada na atividade que lhe foi atribuida.',
+    },
+  ]);
+
+  const handleClickNewMsg = () => {
+    console.log('Handle click');
+    const array = [
+      {
+        id: cardMsgData.length,
+        autor: 'Pessoa',
+        conteudo: newMsg,
+      },
+      ...cardMsgData,
+    ];
+    setMsgCard(array);
+    setNewMsg('');
+  };
 
   return (
     <div id={`modal-${id}`} className="modal fade" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -52,7 +76,12 @@ export const Modal = ({ options }) => {
                       <label htmlFor="message-text" className="col-form-label">
                         Digite sua mensagem:
                       </label>
-                      <textarea className="form-control" id="message-text"></textarea>
+                      <textarea
+                        className="form-control"
+                        id="message-text"
+                        value={newMsg}
+                        onChange={(e) => setNewMsg(e.target.value)}
+                      ></textarea>
                     </div>
                     <button
                       className="btn btn-primary w-100"
@@ -60,7 +89,7 @@ export const Modal = ({ options }) => {
                       data-bs-target={`#collapse-new-mensage${id}`}
                       aria-expanded="false"
                       aria-controls={`#collapse-new-mensage${id}`}
-                      onClick={() => alert('Mensagem enviada')}
+                      onClick={handleClickNewMsg}
                     >
                       Enviar
                     </button>
@@ -68,9 +97,17 @@ export const Modal = ({ options }) => {
                 </div>
               </div>
 
-              <CardMessage />
-              <CardMessage />
-              <CardMessage />
+              {cardMsgData && cardMsgData.length > 0 ? (
+                cardMsgData.map((v) => <CardMessage key={v.id} dados={v} />)
+              ) : (
+                <CardMessage
+                  dados={{
+                    autor: '-',
+                    conteudo: 'Ainda não foi enviado nenhum comentário',
+                    dataEnvio: '-',
+                  }}
+                />
+              )}
             </div>
           </div>
           <div className="modal-footer">
