@@ -8,20 +8,20 @@ function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-const data = [
-  ['Status', 'Atividades'],
-  ['Concluido', getRandom(20, 100)],
-  ['Pendente', getRandom(1, 100)],
-];
-
-const options = {
-  legend: 'none',
-  pieSliceText: 'label',
-  pieStartAngle: 100,
-  colors: ['#0d6efd', '#e96b55'],
-};
-
 export const CardProject = ({ option }) => {
+  const data = [
+    ['Status', 'Atividades'],
+    ['Concluido', getRandom(20, 100)],
+    ['Pendente', getRandom(1, 100)],
+  ];
+
+  const options = {
+    legend: 'none',
+    pieSliceText: 'label',
+    pieStartAngle: 100,
+    colors: ['#0d6efd', '#f36060'],
+  };
+
   return (
     <div key={option.id} className="card col-md-2 m-2 justify-center" style={{ width: '18rem' }}>
       <Chart class="card-img-top" chartType="PieChart" data={data} options={options} width={'100%'} />
