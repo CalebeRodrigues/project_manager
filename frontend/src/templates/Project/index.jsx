@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { GanttChart } from '../../components/GanttChart';
 import { CardActivity } from '../../components/CardActivity';
+import { KanbanActivity } from '../../components/KanbanActivity';
 
 export const Project = () => {
   const params = useParams();
@@ -61,7 +62,51 @@ export const Project = () => {
       <br />
       <br />
       <GanttChart />
-      <h3>Atividades</h3>
+      <div className="row">
+        <div className="col-6 p-1">
+          <h3>Atividades</h3>
+        </div>
+        <div className="col-6" style={{ textAlign: 'right' }}>
+          <div className="btn-group" role="group" aria-label="Basic example">
+            <button type="button" className="btn btn-primary">
+              Criar
+            </button>
+            <button type="button" className="btn btn-primary">
+              Atualizar
+            </button>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <KanbanActivity />
+
+      <div>
+        <div className="collapse" id="collapseWidthExample">
+          <div className="card card-body" style={{ width: '300px' }}>
+            This is some placeholder content for a horizontal collapse
+          </div>
+        </div>
+      </div>
+
+      <div className="collapse" id="collapseWidthExample">
+        <div className="card card-body" style={{ width: '300px' }}>
+          This is some placeholder content for a horizontal collapse
+        </div>
+      </div>
+
+      <div className="collapse" id="collapseWidthExample">
+        <div className="card card-body" style={{ width: '300px' }}>
+          This is some placeholder content for a horizontal collapse
+        </div>
+      </div>
+
+      <div className="collapse" id="collapseWidthExample">
+        <div className="card card-body" style={{ width: '300px' }}>
+          This is some placeholder content for a horizontal collapse
+        </div>
+      </div>
+
       <div className="row">
         {valores.map((v) => (
           <div key={v.id} className="col-md-3">
