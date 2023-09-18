@@ -35,7 +35,7 @@ class User {
       }
     });
 
-    this.user = (this.user != null && !bcryptjs.compareSync(this.body.senha, this.user.senha)) ? null : this.user;
+    this.user = (this.user != null && !(bcryptjs.compareSync(this.body.senha, this.user.senha))) ? null : this.user;
       
     if (this.user == null) {
       throw new Error('Email ou senha incorretos!');
@@ -52,6 +52,9 @@ class User {
     if (usuario == null) {
       throw new Error('Usuário não encontrado');
     }
+
+    const salt = bcryptjs.genSaltSync();
+    this.body.senha = bcryptjs.hashSync(this.body.senha, salt);
 
     usuario.nome = this.body.nome,
     usuario.email = this.body.email,

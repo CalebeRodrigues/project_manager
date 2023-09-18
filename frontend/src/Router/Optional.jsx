@@ -1,17 +1,11 @@
-import { Route, Redirect } from 'react-router-dom';
-import { useAuth } from '../../context/Auth/useAuth';
+import { useContext } from 'react';
+import { Navigate, Outlet } from 'react-router-dom';
+
+import { AuthContext } from '../context/Auth/Context';
 
 // eslint-disable-next-line
-export const OptionalRoute = ( { component: Component, ...rest } ) => {
-  const auth = useAuth();
-  return (
-    <Route
-      {...rest}
-      render={() =>
-        //eslint-disable-next-line
-          !auth.token ? <Component {...rest} />
-          : <Redirect to="/home" />
-      }
-    />
-  );
+export const RouteOptional = ( { component: Component, ...rest } ) => {
+  const { token } = useContext(AuthContext);
+
+  return !token ? <Outlet /> : <Navigate to="/" />;
 };

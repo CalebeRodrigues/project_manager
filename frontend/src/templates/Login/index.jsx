@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
 
 import './styles.css'; // Importando um arquivo CSS personalizado
-import { Api } from '../../services/api';
+import { useAuth } from '../../context/Auth/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export const Login = () => {
   const [values, setValues] = useState({ email: '', pass: '' });
+  const auth = useAuth();
+
+  const navigate = useNavigate();
 
   const login = async () => {
-    const user = await Api.get('/user/login', {
-      email: values.email,
-      senha: values.pass,
-    }).catch((e) => alert(e.message));
-
-    console.log(user);
-    console.table(user);
+    try {
+      await auth.authenticate(values.email, values.pass);
+      console.log('Loguei');
+      return navigate('/');
+    } catch (e) {
+      console.log(e.message);
+    }
   };
 
   const onChange = (e) => {
@@ -26,7 +30,6 @@ export const Login = () => {
   };
 
   const handleClick = () => {
-    alert(`E-mail: ${values.email}\nSenha: ${values.pass}`);
     login();
   };
 

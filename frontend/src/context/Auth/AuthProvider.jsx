@@ -9,16 +9,9 @@ export const AuthProvider = ({ children }) => {
   const authenticate = async (email, senha) => {
     const response = await LoginRequest(email, senha);
 
-    const payload = { token: response.IDUser, email, nome: response.nome, kanbanActive: false };
+    const payload = { token: response.id, email, nome: response.nome };
 
     setToken(payload);
-  };
-
-  const kanban = async (status) => {
-    setToken({
-      ...token,
-      kanbanActive: status,
-    });
   };
 
   const logout = async () => {
@@ -30,7 +23,6 @@ export const AuthProvider = ({ children }) => {
       value={{
         ...token,
         authenticate,
-        kanban,
         logout,
       }}
     >
