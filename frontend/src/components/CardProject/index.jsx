@@ -27,7 +27,7 @@ export const CardProject = ({ option }) => {
       <Chart class="card-img-top" chartType="PieChart" data={data} options={options} width={'100%'} />
       <div className="card-body">
         <h5 className="card-title">{option.title}</h5>
-        <p className="card-text">{option.description}</p>
+        <p className="card-text">{option.descricao}</p>
         <Link to={`/proj/${option.id}`} className="btn btn-primary">
           Detalhes
         </Link>
@@ -76,6 +76,6 @@ CardProject.propTypes = {
   option: P.shape({
     id: P.number,
     title: P.string,
-    description: P.string,
+    descricao: P.string,
   }),
 };

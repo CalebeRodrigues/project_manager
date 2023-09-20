@@ -45,7 +45,7 @@ export const Navbar = () => {
             <div className="offcanvas-body">
               <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
                 <li className="nav-item" data-bs-dismiss="offcanvas">
-                  <Link className="nav-link active" aria-current="page" to="/">
+                  <Link className="nav-link" aria-current="page" to="/">
                     Inicio
                   </Link>
                 </li>
@@ -61,9 +61,17 @@ export const Navbar = () => {
                     Projetos
                   </button>
 
-                  <div className="collapse" id="collapseExample" data-bs-dismiss="offcanvas">
-                    <Link className="nav-link active" aria-current="page" to="/">
-                      Visualizar
+                  <div
+                    className="collapse"
+                    id="collapseExample"
+                    data-bs-dismiss="offcanvas"
+                    style={{ paddingLeft: '5%' }}
+                  >
+                    <Link className="nav-link" aria-current="page" to="/">
+                      Meus projetos
+                    </Link>
+                    <Link className="nav-link" aria-current="page" to="/">
+                      Criar
                     </Link>
                   </div>
                 </li>

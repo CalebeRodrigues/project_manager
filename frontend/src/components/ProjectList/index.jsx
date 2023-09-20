@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CardProject, CardsProjectLoading } from '../CardProject';
 
-const projects = [
-  { id: 1, title: 'Projeto 1', description: 'Descrição do Projeto 1' },
-  { id: 2, title: 'Projeto 2', description: 'Descrição do Projeto 2' },
-  { id: 3, title: 'Projeto 3', description: 'Descrição do Projeto 3' },
-  { id: 4, title: 'Projeto 4', description: 'Descrição do Projeto 4' },
-  { id: 5, title: 'Projeto 5', description: 'Descrição do Projeto 5' },
-  { id: 6, title: 'Projeto 6', description: 'Descrição do Projeto 6' },
-  { id: 7, title: 'Projeto 7', description: 'Descrição do Projeto 7' },
-  // Adicione mais projetos conforme necessário
-];
+import { Api } from '../../services/api';
 
 const ProjectList = () => {
   // eslint-disable-next-line
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [projects, setProjects] = useState([]);
+
+  const loadProjects = async () => {
+    await setTimeout(() => {}, 3000);
+    try {
+      const request = await Api.get('/proj');
+      setProjects(request.data);
+      setLoading(false);
+    } catch (e) {
+      setProjects(null);
+    }
+  };
+
+  useEffect(() => {
+    loadProjects();
+  }, []);
 
   return (
     <div className="container mt-2">
