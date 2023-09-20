@@ -49,10 +49,23 @@ export const Navbar = () => {
                     Inicio
                   </Link>
                 </li>
-                <li className="nav-item" data-bs-dismiss="offcanvas">
-                  <Link className="nav-link" to="/projetos">
+                <li className="nav-item">
+                  <button
+                    className="nav-link"
+                    to="/"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseExample"
+                    aria-expanded="false"
+                    aria-controls="collapseExample"
+                  >
                     Projetos
-                  </Link>
+                  </button>
+
+                  <div className="collapse" id="collapseExample" data-bs-dismiss="offcanvas">
+                    <Link className="nav-link active" aria-current="page" to="/">
+                      Visualizar
+                    </Link>
+                  </div>
                 </li>
                 <li className="nav-item" data-bs-dismiss="offcanvas">
                   <Link className="nav-link" to="/atividades">
