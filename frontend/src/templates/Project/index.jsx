@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { GanttChart } from '../../components/GanttChart';
 import { CardActivity } from '../../components/CardActivity';
 import { KanbanActivity } from '../../components/KanbanActivity';
+import { CollapseList } from '../../components/CollapseList';
 
 export const Project = () => {
   const params = useParams();
@@ -64,7 +65,7 @@ export const Project = () => {
       <GanttChart />
       <div className="row">
         <div className="col-6 p-1">
-          <h3>Atividades</h3>
+          <h3>Etapas</h3>
         </div>
         <div className="col-6" style={{ textAlign: 'right' }}>
           <div className="btn-group" role="group" aria-label="Basic example">
@@ -78,6 +79,13 @@ export const Project = () => {
         </div>
       </div>
       <br />
+
+      <CollapseList
+        data={{
+          id: 1,
+          nome: 'Teste etapa',
+        }}
+      />
 
       <KanbanActivity />
 

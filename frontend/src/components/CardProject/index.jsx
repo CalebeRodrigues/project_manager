@@ -26,7 +26,7 @@ export const CardProject = ({ option }) => {
     <div key={option.id} className="card col-md-2 m-2 justify-center" style={{ width: '18rem' }}>
       <Chart class="card-img-top" chartType="PieChart" data={data} options={options} width={'100%'} />
       <div className="card-body">
-        <h5 className="card-title">{option.title}</h5>
+        <h5 className="card-title">{option.nome}</h5>
         <p className="card-text">{option.descricao}</p>
         <Link to={`/proj/${option.id}`} className="btn btn-primary">
           Detalhes
@@ -75,7 +75,7 @@ export const CardsProjectLoading = () => {
 CardProject.propTypes = {
   option: P.shape({
     id: P.number,
-    title: P.string,
+    nome: P.string,
     descricao: P.string,
   }),
 };

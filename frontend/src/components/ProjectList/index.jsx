@@ -9,7 +9,6 @@ const ProjectList = () => {
   const [projects, setProjects] = useState([]);
 
   const loadProjects = async () => {
-    await setTimeout(() => {}, 3000);
     try {
       const request = await Api.get('/proj');
       setProjects(request.data);
