@@ -29,7 +29,7 @@ exports.update = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const list = await Member.all();
+    const list = (!req.query.user) ? await Member.all() : await Member.all(req.query.user);
 
     res.status(200).send(list);
   }

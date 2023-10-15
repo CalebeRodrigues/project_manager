@@ -1,9 +1,9 @@
 export const Navbar = () => {
   return (
-    <nav className="navbar bg-body-tertiary fixed-top">
+    <nav className="navbar fixed-top">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
-          Offcanvas navbar
+          Gerenciador de projetos
         </a>
         <button
           className="navbar-toggler"

@@ -67,6 +67,7 @@ route.delete('/activity/delete/:id', ActivityController.delete);
 
 // Members
 route.get('/members/:proj', MemberController.findAll);
+route.get('/members/', MemberController.findAll);
 
 route.post('/members/insert/:idUser/:idProj/:idPerfil', MemberController.insert);
 route.put('/members/update/:id/:idPerfil', MemberController.update);

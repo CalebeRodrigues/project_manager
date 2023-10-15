@@ -26,7 +26,12 @@ exports.findOne = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const model = await Proj.findAll();
+    const model = (!req.query.user) ?
+      await Proj.findAll()
+      :
+      await Proj.findAll(req.query.user);
+
+    console.log(req.query.user);
 
     res.status(200).send(model);
   }

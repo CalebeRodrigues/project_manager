@@ -4,6 +4,8 @@ export const Container = styled.div`
   min-height: 87vh;
   border: 1px solid gray;
 
+  background-color: #172c3f;
+
   border-radius: 15px;
 
   transition: 0.8s;
@@ -13,7 +15,7 @@ export const Container = styled.div`
   }
 
   :hover {
-    background-color: #f1f1f1;
+    background-color: #060c13;
   }
 `;
 
@@ -23,6 +25,7 @@ export const Icon = styled.img`
 `;
 
 export const Item = styled.div`
+  color: white;
   text-align: left;
   justify-content: center;
   justify-items: center;

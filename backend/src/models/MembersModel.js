@@ -52,8 +52,10 @@ class Member {
 
 
   // Metodos Static
-  static async all() {
-    return MemberModel.findAll({ include: [UserModel, ProjModel, PerfilModel] });
+  static async all(idUser=undefined) {
+    const membersProj = (!idUser) ? await MemberModel.findAll({ include: [UserModel, ProjModel, PerfilModel] })
+      : await MemberModel.findAll({ include: [ProjModel, PerfilModel], where: { idUser } });
+    return membersProj;
   }
 }
 
