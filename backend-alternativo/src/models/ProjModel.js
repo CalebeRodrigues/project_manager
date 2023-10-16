@@ -20,8 +20,19 @@ class Proj {
     this.proj = await ProjModel.create(this.body);
   }
 
-  async update() {
+  async update(id) {
+    this.cleanUp();
+    const projTemp = await ProjModel.findOne({where: { id }});
 
+    if(!projTemp) throw new Error('Não foi encontrado um projeto atrelado a este id');
+
+    await projTemp.update({
+      ...this.body
+    });
+
+    await projTemp.save();
+
+    this.proj = projTemp;
   }
 
   async findOne(id, include=null) {
