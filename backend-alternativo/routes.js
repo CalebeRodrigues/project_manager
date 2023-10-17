@@ -16,6 +16,15 @@ route.get('/', (req, res) => {
 route.get('/users', UserController.findAllUsers);
 
 
+// Projeto
+route.get('/projs/:idUser', ProjController.findAll);
 route.get('/proj/:id', ProjController.findOne);
+
+route.post('/proj/create', ProjController.create);
+
+route.put('/proj/update/:id', ProjController.update);
+
+
+
 
 module.exports = route;

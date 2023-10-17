@@ -170,5 +170,6 @@ exports.UserModel = UserModel;
 exports.ProjModel = ProjModel;
 exports.ProjUserModel = ProjUserModel;
 exports.PerfilModel = PerfilModel;
+exports.EtapaModel = EtapaModel;
 exports.AtividadeModel = AtividadeModel;
 exports.ComentariosModel = ComentariosModel;
