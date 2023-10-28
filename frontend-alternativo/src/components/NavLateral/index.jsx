@@ -5,11 +5,13 @@ import dashboards from '../../assets/icons/dashboards_cor.png';
 import membros from '../../assets/icons/membros_cor.png';
 import atividades from '../../assets/icons/atividades_cor.png';
 import ideia from '../../assets/icons/ideia_cor.png';
+
 import { Link } from 'react-router-dom';
 
 export const NavLateral = () => {
   return (
     <Styles.Container className="w-100">
+      <Styles.Item>Proj Manager</Styles.Item>
       <Link to={'/'} style={{ textDecoration: 'none' }}>
         <Styles.Item>
           <Styles.Icon src={inicio} /> Inicio
@@ -38,7 +40,6 @@ export const NavLateral = () => {
           Projetos
         </Styles.Item>
       </Link>
-      <Styles.Item>Navbar Lateral</Styles.Item>
     </Styles.Container>
   );
 };

@@ -1,10 +1,19 @@
+import { Link } from 'react-router-dom';
+import * as Styles from './styles';
+
+import inicio from '../../assets/icons/inicio.png';
+import dashboards from '../../assets/icons/dashboards_cor.png';
+import membros from '../../assets/icons/membros_cor.png';
+import atividades from '../../assets/icons/atividades_cor.png';
+import ideia from '../../assets/icons/ideia_cor.png';
+
 export const Navbar = () => {
   return (
-    <nav className="navbar fixed-top">
+    <Styles.Container className="navbar fixed-top">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <Styles.Title className="navbar-brand" href="#">
           Gerenciador de projetos
-        </a>
+        </Styles.Title>
         <button
           className="navbar-toggler"
           type="button"
@@ -15,71 +24,66 @@ export const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div
+        <Styles.ContainerCanvas
           className="offcanvas offcanvas-end"
           tabIndex="-1"
           id="offcanvasNavbar"
           aria-labelledby="offcanvasNavbarLabel"
         >
           <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-              Offcanvas
-            </h5>
+            <Styles.TitleOffCanvas className="offcanvas-title" id="offcanvasNavbarLabel">
+              Menu
+            </Styles.TitleOffCanvas>
             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
           </div>
           <div className="offcanvas-body">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">
-                  Home
-                </a>
+                <Link to={'/'} style={{ textDecoration: 'none' }}>
+                  <Styles.Item>
+                    <Styles.Icon src={inicio} /> Inicio
+                  </Styles.Item>
+                </Link>
               </li>
+
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
-                </a>
+                <Link to={'/dashboards'} style={{ textDecoration: 'none' }}>
+                  <Styles.Item>
+                    <Styles.Icon src={dashboards} /> Dashboards
+                  </Styles.Item>
+                </Link>
               </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <ul className="dropdown-menu">
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Action
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Another action
-                    </a>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Something else here
-                    </a>
-                  </li>
-                </ul>
+
+              <li className="nav-item">
+                <Link to={'/members'} style={{ textDecoration: 'none' }}>
+                  <Styles.Item>
+                    <Styles.Icon src={membros} />
+                    Membros
+                  </Styles.Item>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={'/atividades'} style={{ textDecoration: 'none' }}>
+                  <Styles.Item>
+                    <Styles.Icon src={atividades} />
+                    Atividades
+                  </Styles.Item>
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={'/projetos'} style={{ textDecoration: 'none' }}>
+                  <Styles.Item>
+                    <Styles.Icon src={ideia} />
+                    Projetos
+                  </Styles.Item>
+                </Link>
               </li>
             </ul>
-            <form className="d-flex mt-3" role="search">
-              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
           </div>
-        </div>
+        </Styles.ContainerCanvas>
       </div>
-    </nav>
+    </Styles.Container>
   );
 };

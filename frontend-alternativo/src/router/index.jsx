@@ -9,6 +9,7 @@ import { RoutePrivate } from './Private';
 import { useAuth } from '../context/Auth/useAuth';
 import { useEffect } from 'react';
 import { Projects } from '../templates/Projects';
+import styled from 'styled-components';
 
 export const Router = () => {
   const auth = useAuth();
@@ -18,7 +19,7 @@ export const Router = () => {
   return (
     <BrowserRouter>
       <Navbar />
-      <div className="row" style={{ marginTop: '4.5%' }}>
+      <Container className="row">
         <div className={`col-lg-2 ${!auth.token ? 'd-none' : ''}`} style={{ padding: 0, paddingLeft: '1.2%' }}>
           <NavLateral />
         </div>
@@ -39,7 +40,25 @@ export const Router = () => {
             </Route>
           </Routes>
         </div>
-      </div>
+      </Container>
     </BrowserRouter>
   );
 };
+
+const Container = styled.div`
+  @media screen and (max-width: 991px) {
+    margin-top: 7%;
+  }
+
+  @media screen and (max-width: 769px) {
+    margin-top: 12%;
+  }
+
+  @media screen and (max-width: 500px) {
+    margin-top: 14%;
+  }
+
+  @media screen and (max-width: 382px) {
+    margin-top: 20%;
+  }
+`;
