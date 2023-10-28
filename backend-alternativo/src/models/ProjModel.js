@@ -18,6 +18,12 @@ class Proj {
     if(!user) throw new Error('Não foi encontrado nenhum usuário atrelado a este ID.');
 
     this.proj = await ProjModel.create(this.body);
+
+    await ProjUserModel.create({
+      idUser: user.id,
+      idProj: this.proj.id,
+      idPerfil: 1
+    });
   }
 
   async update(id) {
@@ -53,12 +59,11 @@ class Proj {
   async findAll(idUser, include) {
     const array = [];
     if(include) {
-      if(include.contains('proj')) array.push(ProjModel);
-      if(include.contains('user')) array.push(UserModel);
-      if(include.contains('perfil')) array.push(PerfilModel);
+      if(include.includes('proj')) array.push(ProjModel);
+      if(include.includes('user')) array.push(UserModel);
+      if(include.includes('perfil')) array.push(PerfilModel);
     }
     include = array;
-
 
     this.proj = 
         (!idUser) ?

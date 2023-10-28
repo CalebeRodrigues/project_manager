@@ -14,7 +14,15 @@ route.get('/', (req, res) => {
 });
 
 route.get('/users', UserController.findAllUsers);
+route.get('/user/:id', UserController.findUserById);
 
+route.post('/user/register', UserController.register);
+
+route.post('/user/login', UserController.login);
+
+route.put('/user/update/:id', UserController.update);
+
+route.delete('/user/delete/:id', UserController.delete);
 
 // Projeto
 route.get('/projs/:idUser', ProjController.findAll);
