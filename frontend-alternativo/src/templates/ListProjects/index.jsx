@@ -3,7 +3,7 @@ import { useAuth } from '../../context/Auth/useAuth';
 import { Api } from '../../services/api';
 import { CardProject } from '../../components/CardProject';
 
-export const Projects = () => {
+export const ListProjects = () => {
   const auth = useAuth();
   const [projects, setProjects] = useState(null);
 
@@ -31,7 +31,7 @@ export const Projects = () => {
         {projects &&
           projects.map((v) => {
             return (
-              <div key={v.proj.id} className="col m-1">
+              <div key={v.proj.id} className="col-lg-6 mt-4 mb-4">
                 <CardProject
                   data={{
                     id: v.proj.id,

@@ -8,8 +8,9 @@ import { RouteOptional } from './Optional';
 import { RoutePrivate } from './Private';
 import { useAuth } from '../context/Auth/useAuth';
 import { useEffect } from 'react';
-import { Projects } from '../templates/Projects';
+import { ListProjects } from '../templates/ListProjects';
 import styled from 'styled-components';
+import { Project } from '../templates/Project';
 
 export const Router = () => {
   const auth = useAuth();
@@ -17,33 +18,40 @@ export const Router = () => {
   useEffect(() => console.log(auth));
 
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Container className="row">
-        <div className={`col-lg-2 ${!auth.token ? 'd-none' : ''}`} style={{ padding: 0, paddingLeft: '1.2%' }}>
-          <NavLateral />
-        </div>
-        <div className={`${!auth.token ? '' : 'col-lg-10'}`}>
-          <Routes>
-            <Route path="/login" element={<RouteOptional />}>
-              <Route path="/login" element={<Login />} />
-            </Route>
+    <Main>
+      <BrowserRouter>
+        <Navbar />
+        <Container className="row">
+          <div className={`col-lg-2 ${!auth.token ? 'd-none' : ''}`} style={{ padding: 0, paddingLeft: '1.2%' }}>
+            <NavLateral />
+          </div>
+          <div className={`${!auth.token ? '' : 'col-lg-10'}`}>
+            <Routes>
+              <Route path="/login" element={<RouteOptional />}>
+                <Route path="/login" element={<Login />} />
+              </Route>
 
-            <Route path="/" element={<RoutePrivate />}>
-              <Route path="/" element={<App />} />
-              <Route path="/dashboards" element={<App />} />
-              <Route path="/members" element={<App />} />
-              <Route path="/atividades" element={<App />} />
-              <Route path="/projetos" element={<Projects />} />
-              {/* <Route path="/cadastro" element={<Cadastro />} />
+              <Route path="/" element={<RoutePrivate />}>
+                <Route path="/" element={<App />} />
+                <Route path="/dashboards" element={<App />} />
+                <Route path="/members" element={<App />} />
+                <Route path="/atividades" element={<App />} />
+                <Route path="/projetos" element={<ListProjects />} />
+                <Route path="/projeto/:id" element={<Project />} />
+                {/* <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/proj/:id" element={<Project />} /> */}
-            </Route>
-          </Routes>
-        </div>
-      </Container>
-    </BrowserRouter>
+              </Route>
+            </Routes>
+          </div>
+        </Container>
+      </BrowserRouter>
+    </Main>
   );
 };
+
+const Main = styled.div`
+  /* background-color: #112231; */
+`;
 
 const Container = styled.div`
   @media screen and (max-width: 991px) {
