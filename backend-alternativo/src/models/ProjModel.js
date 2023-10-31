@@ -8,9 +8,9 @@ class Proj {
 
   async create() {
     this.cleanUp();
-
+    
     if(!this.body.idCriador) throw new Error('É necessário um usuário atrelado a criação do projeto.');
-
+    
     const user = await UserModel.findOne({
       where: { id: this.body.idCriador }
     });
@@ -18,7 +18,7 @@ class Proj {
     if(!user) throw new Error('Não foi encontrado nenhum usuário atrelado a este ID.');
 
     this.proj = await ProjModel.create(this.body);
-
+    
     await ProjUserModel.create({
       idUser: user.id,
       idProj: this.proj.id,
