@@ -3,4 +3,10 @@ backend/.env
 
 frontend/node_modules
 
+backend-alternativo/node_modules
+backend-alternativo/.env
+
+frontend-alternativo/node_modules
+
+.env
 node_modules
