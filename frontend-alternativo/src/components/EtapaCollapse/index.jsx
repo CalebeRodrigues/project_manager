@@ -7,7 +7,7 @@ export const EtapaCollapse = ({ options }) => {
 
   return (
     <div>
-      <h1
+      <h2
         className="mb-4"
         type="button"
         data-bs-toggle="collapse"
@@ -16,8 +16,8 @@ export const EtapaCollapse = ({ options }) => {
         aria-controls={`collapseExample${id}`}
       >
         Etapa {id} - {nome}
-      </h1>
-      <div className="collapse show" id={`collapseExample${id}`}>
+      </h2>
+      <div className="collapse" id={`collapseExample${id}`}>
         <div className="card card-body">
           <div className="row" style={{ maxHeight: '70vh' }}>
             <div className="col-lg-4">

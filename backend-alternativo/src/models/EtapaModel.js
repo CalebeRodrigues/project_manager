@@ -20,16 +20,39 @@ class Etapa {
     this.etapa = await EtapaModel.create(this.body);
   }
 
-  async update() {
+  async update(id) {
+    this.cleanUp();
 
+    const etapaTemp = await EtapaModel.findOne({ where: { id } });
+
+    if(!etapaTemp) throw new Error('Não foi encontrada nenhuma etapa atrelada a este ID');
+
+    await etapaTemp.update({
+      ...this.body
+    });
+
+    await etapaTemp.save();
+
+    this.etapa = etapaTemp;
   }
 
-  async findOne() {
-    
+  async findOne(id) {
+    this.etapa = await EtapaModel.findOne({ where: { id } });
+
+    if(!this.etapa) throw new Error('Não existe nenhuma etapa atrelada a este ID');
+
+    return this.etapa;
   }
 
-  async findAll() {
+  async findAll(idProj = null) {
+    this.etapa = 
+        (!idProj) ? 
+          await EtapaModel.findAll() :
+          await EtapaModel.findAll({ where: { idProj } });
 
+    if(!this.etapa.length > 0) throw new Error('Não existem etapas criadas na base de dados');
+
+    return this.etapa;
   }
 
   // Garante que tudo que vier no formulário seja uma string

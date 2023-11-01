@@ -3,7 +3,7 @@ const route = express.Router();
 
 const UserController = require('./src/controllers/UserController');
 const ProjController = require('./src/controllers/ProjController');
-// const EtapaController = require('./src/controllers/EtapaController');
+const EtapaController = require('./src/controllers/EtapaController');
 // const AuthController = require('./src/controllers/AuthController');
 // const ActivityController = require('./src/controllers/ActivityController');
 // const MemberController = require('./src/controllers/MemberController');
@@ -32,7 +32,14 @@ route.post('/proj/create', ProjController.create);
 
 route.put('/proj/update/:id', ProjController.update);
 
+// Etapa
+route.get('/etapas', EtapaController.findAll);
+route.get('/etapas/:idProj', EtapaController.findAll);
+route.get('/etapa/:id', EtapaController.findOne);
 
+route.post('/etapa/create', EtapaController.create);
+
+route.put('/etapa/update/id', EtapaController.update);
 
 
 module.exports = route;
