@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { ListProjects } from '../templates/ListProjects';
 import styled from 'styled-components';
 import { Project } from '../templates/Project';
+import { FormProject } from '../templates/FormProject';
 
 export const Router = () => {
   const auth = useAuth();
@@ -37,6 +38,7 @@ export const Router = () => {
                 <Route path="/members" element={<App />} />
                 <Route path="/atividades" element={<App />} />
                 <Route path="/projetos" element={<ListProjects />} />
+                <Route path="/projeto/criar" element={<FormProject />} />
                 <Route path="/projeto/:id" element={<Project />} />
                 {/* <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/proj/:id" element={<Project />} /> */}
