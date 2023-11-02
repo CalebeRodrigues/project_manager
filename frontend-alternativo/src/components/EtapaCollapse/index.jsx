@@ -30,7 +30,7 @@ export const EtapaCollapse = ({ options }) => {
               <h3>Feito</h3>
             </div>
             <div className="row" style={{ height: '62vh', overflowY: 'scroll' }}>
-              <div className="col-lg-4">
+              <div className="col-lg-4" style={{ borderRight: '0.1px solid #a0a0a052' }}>
                 <CardActivity />
                 <CardActivity />
                 <CardActivity />
@@ -39,7 +39,7 @@ export const EtapaCollapse = ({ options }) => {
                 <CardActivity />
                 <CardActivity />
               </div>
-              <div className="col-lg-4">
+              <div className="col-lg-4" style={{ borderRight: '0.1px solid #a0a0a052' }}>
                 <CardActivity />
                 <CardActivity />
                 <CardActivity />

@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import { App } from '../templates/App';
@@ -9,9 +10,9 @@ import { RoutePrivate } from './Private';
 import { useAuth } from '../context/Auth/useAuth';
 import { useEffect } from 'react';
 import { ListProjects } from '../templates/ListProjects';
-import styled from 'styled-components';
 import { Project } from '../templates/Project';
 import { FormProject } from '../templates/FormProject';
+import { Cadastro } from '../templates/Cadastro';
 
 export const Router = () => {
   const auth = useAuth();
@@ -28,8 +29,9 @@ export const Router = () => {
           </div>
           <div className={`${!auth.token ? '' : 'col-lg-10'}`}>
             <Routes>
-              <Route path="/login" element={<RouteOptional />}>
+              <Route path="/" element={<RouteOptional />}>
                 <Route path="/login" element={<Login />} />
+                <Route path="/cadastro" element={<Cadastro />} />
               </Route>
 
               <Route path="/" element={<RoutePrivate />}>
@@ -40,8 +42,6 @@ export const Router = () => {
                 <Route path="/projetos" element={<ListProjects />} />
                 <Route path="/projeto/criar" element={<FormProject />} />
                 <Route path="/projeto/:id" element={<Project />} />
-                {/* <Route path="/cadastro" element={<Cadastro />} />
-                <Route path="/proj/:id" element={<Project />} /> */}
               </Route>
             </Routes>
           </div>

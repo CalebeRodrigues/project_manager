@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
 
 import './styles.css'; // Importando um arquivo CSS personalizado
-import { useAuth } from '../../context/Auth/useAuth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Api } from '../../services/api';
 // import { Tooltip } from '../../components/Tooltip';
 
-export const Login = () => {
-  const [values, setValues] = useState({ email: '', pass: '' });
-  const auth = useAuth();
-  // const [isNotLogin, setLoginStatus] = useState(false);
-  const [loginRequest, setLoginRequest] = useState(false);
+export const Cadastro = () => {
+  const [values, setValues] = useState({ nome: '', email: '', senha: '' });
+  const [registeRequest, setRegisteRequest] = useState(false);
 
-  const navigate = useNavigate();
-
-  const login = async () => {
-    await setTimeout(() => {}, 3000);
+  const register = async () => {
     try {
-      await auth.authenticate(values.email, values.pass);
-      return navigate('/');
+      const response = await Api.post('/user/register', values);
+
+      console.table(response.data);
+      alert('Cadastrado com sucesso!');
     } catch (e) {
-      // setLoginStatus(true);
+      console.log(e.message);
     } finally {
-      setLoginRequest(false);
+      setRegisteRequest(false);
     }
   };
 
@@ -36,8 +33,8 @@ export const Login = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    setLoginRequest(true);
-    login();
+    setRegisteRequest(true);
+    register();
   };
 
   return (
@@ -49,6 +46,10 @@ export const Login = () => {
               <div className="card login-card">
                 <div className="card-body">
                   <h3 className="card-title text-center">Login</h3>
+                  <div className="mb-3">
+                    <label className="form-label">Nome</label>
+                    <input name="nome" type="text" className="form-control" value={values.nome} onChange={onChange} />
+                  </div>
                   <div className="mb-3">
                     <label className="form-label">Usuário</label>
                     <input
@@ -62,25 +63,25 @@ export const Login = () => {
                   <div className="mb-3">
                     <label className="form-label">Senha</label>
                     <input
-                      name="pass"
+                      name="senha"
                       type="password"
                       className="form-control"
-                      value={values.pass}
+                      value={values.senha}
                       onChange={onChange}
                     />
                   </div>
                   <button type="submit" className="btn btn-primary w-100" onClick={handleClick}>
-                    {loginRequest ? (
+                    {registeRequest ? (
                       <div className="spinner-border spinner-border-sm" role="status">
                         <span className="visually-hidden">Loading...</span>
                       </div>
                     ) : (
-                      'Entrar'
+                      'Cadastrar'
                     )}
                   </button>
                   <div className="mb-3"></div>
                   <span>
-                    Ainda não tem conta? <Link to={'/cadastro'}>Realize seu cadastro aqui</Link>
+                    Já tem conta? <Link to={'/login'}>Vá para a página de login</Link>
                   </span>
                 </div>
               </div>

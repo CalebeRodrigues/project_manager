@@ -20,6 +20,12 @@ export const FormProject = () => {
       const response = await Api.post('/proj/create', input);
       console.table(response.data);
       setError(false);
+      setInput({
+        nome: '',
+        descricao: '',
+        status: 'Em andamento',
+        idCriador: '' + auth.token,
+      });
     } catch (e) {
       console.log(e.message);
       setError(true);
@@ -63,6 +69,7 @@ export const FormProject = () => {
               id="nomeProjectForm"
               placeholder="Digite o nome do seu projeto"
               onChange={onChange}
+              value={input.nome}
             />
           </div>
           <div className="mb-3">
@@ -75,6 +82,8 @@ export const FormProject = () => {
               id="exampleFormControlTextarea1"
               rows="3"
               onChange={onChange}
+              defaultValue={input.descricao}
+              value={input.descricao}
             ></textarea>
           </div>
 
