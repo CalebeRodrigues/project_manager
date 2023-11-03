@@ -4,7 +4,9 @@ import * as Styles from './style';
 import P from 'prop-types';
 
 export const CardProject = ({ data }) => {
-  const { id, nome, descricao, status } = data;
+  const { id, nome, status } = data;
+  let { descricao } = data;
+  descricao = descricao.length > 70 ? descricao.substring(0, 70) + '...' : descricao;
 
   return (
     <Styles.Container className="card">

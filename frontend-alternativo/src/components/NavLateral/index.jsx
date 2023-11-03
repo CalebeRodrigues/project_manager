@@ -44,6 +44,12 @@ export const NavLateral = () => {
           Projetos
         </Styles.Item>
       </Link>
+      <Link to={'/projeto/criar'} style={{ textDecoration: 'none' }}>
+        <Styles.Item>
+          <Styles.Icon src={ideia} />
+          Criar
+        </Styles.Item>
+      </Link>
       <Link to={'/'} style={{ textDecoration: 'none' }} onClick={() => auth.logout()}>
         <Styles.Item>
           <Styles.Icon src={sair} />

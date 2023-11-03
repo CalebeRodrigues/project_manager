@@ -13,6 +13,7 @@ import { ListProjects } from '../templates/ListProjects';
 import { Project } from '../templates/Project';
 import { FormProject } from '../templates/FormProject';
 import { Cadastro } from '../templates/Cadastro';
+import { FormEtapa } from '../templates/FormEtapa';
 
 export const Router = () => {
   const auth = useAuth();
@@ -42,6 +43,7 @@ export const Router = () => {
                 <Route path="/projetos" element={<ListProjects />} />
                 <Route path="/projeto/criar" element={<FormProject />} />
                 <Route path="/projeto/:id" element={<Project />} />
+                <Route path="/projeto/:id/etapa" element={<FormEtapa />} />
               </Route>
             </Routes>
           </div>
