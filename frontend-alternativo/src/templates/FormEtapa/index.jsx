@@ -8,6 +8,8 @@ export const FormEtapa = () => {
   const [etapas, setEtapas] = useState(null);
   const [projeto, setProjeto] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const [dataInvalid, setDataInvalid] = useState('');
+  const [isError, setIsError] = useState({ show: false, sucess: false });
   const [input, setInput] = useState({
     nome: '',
     descricao: '',
@@ -46,6 +48,15 @@ export const FormEtapa = () => {
   };
 
   const createEtapa = async () => {
+    setIsError({
+      show: false,
+      sucess: false,
+    });
+    if (!(new Date(input.dataInicio) < new Date(input.dataFim))) {
+      setDataInvalid('is-invalid');
+      return;
+    }
+
     setLoading(true);
     if (input.nome.length < 3) alert('Favor inserir um nome maior para etapa');
     try {
@@ -58,10 +69,17 @@ export const FormEtapa = () => {
         idProj: params.id,
       });
       console.log(resp.data);
-
+      setIsError({
+        show: true,
+        sucess: true,
+      });
       console.log(input);
     } catch (e) {
       console.log(e.message);
+      setIsError({
+        show: true,
+        sucess: false,
+      });
     } finally {
       setInput({
         nome: '',
@@ -89,6 +107,13 @@ export const FormEtapa = () => {
     findEtapasByProject();
   }, []);
 
+  const handleClickCloseMsg = () => {
+    setIsError({
+      show: false,
+      sucess: false,
+    });
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
 
@@ -112,7 +137,7 @@ export const FormEtapa = () => {
               <form>
                 <div className="mb-3">
                   <label htmlFor="exampleFormControlTextarea1" className="form-label">
-                    Descrição do projeto
+                    Nome da etapa
                   </label>
                   <input
                     name="nome"
@@ -128,7 +153,7 @@ export const FormEtapa = () => {
 
                 <div className="mb-3">
                   <label htmlFor="exampleFormControlTextarea1" className="form-label">
-                    Descrição do projeto
+                    Descrição da etapa
                   </label>
                   <textarea
                     name="descricao"
@@ -143,30 +168,39 @@ export const FormEtapa = () => {
 
                 <div className="mb-3">
                   <label htmlFor="exampleFormControlTextarea1" className="form-label">
-                    Descrição do projeto
+                    Data de inicio e fim da etapa
                   </label>
                   <div className="input-group">
                     <input
                       name="dataInicio"
                       type="date"
-                      className="form-control"
+                      className={`form-control ${dataInvalid}`}
                       placeholder="Insira o nome da etapa"
                       aria-label="Insira o nome da etapa"
                       aria-describedby="button-addon2"
                       value={input.dataInicio}
-                      onChange={onChange}
+                      onChange={(e) => {
+                        setDataInvalid('');
+                        onChange(e);
+                      }}
                     />
                     <div style={{ margin: '0 1%' }}></div>
                     <input
                       name="dataFim"
                       type="date"
-                      className="form-control"
+                      className={`form-control ${dataInvalid}`}
                       placeholder="Insira o nome da etapa"
                       aria-label="Insira o nome da etapa"
                       aria-describedby="button-addon2"
                       value={input.dataFim}
-                      onChange={onChange}
+                      onChange={(e) => {
+                        setDataInvalid('');
+                        onChange(e);
+                      }}
                     />
+                    <div id="validationServer03Feedback" className="invalid-feedback">
+                      A data final deve ser superior a data de inicio
+                    </div>
                   </div>
                 </div>
 
@@ -181,6 +215,35 @@ export const FormEtapa = () => {
                   )}
                 </button>
               </form>
+              <div>
+                {isError.show ? (
+                  isError.sucess ? (
+                    <div className="mt-4 alert alert-success alert-dismissible fade show" role="alert">
+                      <strong>Etapa criada com sucesso!</strong>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                        onClick={handleClickCloseMsg}
+                      ></button>
+                    </div>
+                  ) : (
+                    <div className="mt-4 alert alert-danger alert-dismissible fade show" role="alert">
+                      <strong>Ocorreu um erro ao criar a etapa, tente novamente mais tarde.</strong>
+                      <button
+                        type="button"
+                        className="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                        onClick={handleClickCloseMsg}
+                      ></button>
+                    </div>
+                  )
+                ) : (
+                  <span></span>
+                )}
+              </div>
             </div>
           </div>
 
