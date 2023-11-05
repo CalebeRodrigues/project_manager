@@ -105,93 +105,109 @@ export const FormEtapa = () => {
         </h1>
       )}
 
-      <div className="container mt-4 mb-4">
+      {projeto ? (
         <div>
-          <form>
-            <div className="mb-3">
-              <label htmlFor="exampleFormControlTextarea1" className="form-label">
-                Descrição do projeto
-              </label>
-              <input
-                name="nome"
-                type="text"
-                className="form-control"
-                placeholder="Insira o nome da etapa"
-                aria-label="Insira o nome da etapa"
-                aria-describedby="button-addon2"
-                value={input.nome}
-                onChange={onChange}
-              />
-            </div>
+          <div className="container mt-4 mb-4">
+            <div>
+              <form>
+                <div className="mb-3">
+                  <label htmlFor="exampleFormControlTextarea1" className="form-label">
+                    Descrição do projeto
+                  </label>
+                  <input
+                    name="nome"
+                    type="text"
+                    className="form-control"
+                    placeholder="Insira o nome da etapa"
+                    aria-label="Insira o nome da etapa"
+                    aria-describedby="button-addon2"
+                    value={input.nome}
+                    onChange={onChange}
+                  />
+                </div>
 
-            <div className="mb-3">
-              <label htmlFor="exampleFormControlTextarea1" className="form-label">
-                Descrição do projeto
-              </label>
-              <textarea
-                name="descricao"
-                className="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                defaultValue={input.descricao}
-                value={input.descricao}
-                onChange={onChange}
-              ></textarea>
-            </div>
+                <div className="mb-3">
+                  <label htmlFor="exampleFormControlTextarea1" className="form-label">
+                    Descrição do projeto
+                  </label>
+                  <textarea
+                    name="descricao"
+                    className="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                    defaultValue={input.descricao}
+                    value={input.descricao}
+                    onChange={onChange}
+                  ></textarea>
+                </div>
 
-            <div className="mb-3">
-              <label htmlFor="exampleFormControlTextarea1" className="form-label">
-                Descrição do projeto
-              </label>
-              <div className="input-group">
-                <input
-                  name="dataInicio"
-                  type="date"
-                  className="form-control"
-                  placeholder="Insira o nome da etapa"
-                  aria-label="Insira o nome da etapa"
-                  aria-describedby="button-addon2"
-                  value={input.dataInicio}
-                  onChange={onChange}
-                />
-                <div style={{ margin: '0 1%' }}></div>
-                <input
-                  name="dataFim"
-                  type="date"
-                  className="form-control"
-                  placeholder="Insira o nome da etapa"
-                  aria-label="Insira o nome da etapa"
-                  aria-describedby="button-addon2"
-                  value={input.dataFim}
-                  onChange={onChange}
-                />
-              </div>
-            </div>
+                <div className="mb-3">
+                  <label htmlFor="exampleFormControlTextarea1" className="form-label">
+                    Descrição do projeto
+                  </label>
+                  <div className="input-group">
+                    <input
+                      name="dataInicio"
+                      type="date"
+                      className="form-control"
+                      placeholder="Insira o nome da etapa"
+                      aria-label="Insira o nome da etapa"
+                      aria-describedby="button-addon2"
+                      value={input.dataInicio}
+                      onChange={onChange}
+                    />
+                    <div style={{ margin: '0 1%' }}></div>
+                    <input
+                      name="dataFim"
+                      type="date"
+                      className="form-control"
+                      placeholder="Insira o nome da etapa"
+                      aria-label="Insira o nome da etapa"
+                      aria-describedby="button-addon2"
+                      value={input.dataFim}
+                      onChange={onChange}
+                    />
+                  </div>
+                </div>
 
-            <button className="btn btn-primary" type="submit" id="button-addon2" onClick={handleClick}>
-              Criar Etapa{' '}
-              {isLoading && (
-                <span
-                  className="spinner-border spinner-border-sm"
-                  style={{ marginLeft: '3px' }}
-                  aria-hidden="true"
-                ></span>
-              )}
-            </button>
-          </form>
+                <button className="btn btn-primary" type="submit" id="button-addon2" onClick={handleClick}>
+                  Criar Etapa{' '}
+                  {isLoading && (
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      style={{ marginLeft: '3px' }}
+                      aria-hidden="true"
+                    ></span>
+                  )}
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div className="mt-4">
+            {etapas &&
+              etapas.map((v) => (
+                <div key={v.id} className="mb-2">
+                  <h5>{v.nome}</h5>
+                  <p>{v.descricao}</p>
+                  <p>{v.dataInicio}</p>
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
-
-      <div className="mt-4">
-        {etapas &&
-          etapas.map((v) => (
-            <div key={v.id} className="mb-2">
-              <h5>{v.nome}</h5>
-              <p>{v.descricao}</p>
-              <p>{v.dataInicio}</p>
-            </div>
-          ))}
-      </div>
+      ) : (
+        <div className="d-flex justify-content-center" style={{ height: '40vh', width: '100%' }}>
+          <div className="spinner-grow" role="status" style={{ margin: 'auto 2%' }}>
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <div className="spinner-grow" role="status" style={{ margin: 'auto 2%' }}>
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <div className="spinner-grow" role="status" style={{ margin: 'auto 2%' }}>
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
