@@ -1,6 +1,14 @@
+import { useEffect } from 'react';
+import { useProject } from '../../context/Project/useProject';
 import './styles.css';
 
 export const App = () => {
+  const projNav = useProject();
+
+  useEffect(() => {
+    projNav.reset();
+  });
+
   return (
     <div className="App">
       <header className="App-header">

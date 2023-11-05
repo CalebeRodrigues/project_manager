@@ -7,12 +7,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import 'bootstrap/dist/js/bootstrap.bundle';
 import { AuthProvider } from './context/Auth/AuthProvider';
+import { ProjectProvider } from './context/Project/ProjectPovider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <AuthProvider>
-      <Router />
+      <ProjectProvider>
+        <Router />
+      </ProjectProvider>
     </AuthProvider>
   </React.StrictMode>,
 );

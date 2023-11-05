@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/Auth/useAuth';
 import { Api } from '../../services/api';
 import { CardProject } from '../../components/CardProject';
+import { Link } from 'react-router-dom';
+import { useProject } from '../../context/Project/useProject';
 
 export const ListProjects = () => {
   const auth = useAuth();
+  const projNav = useProject();
   const [projects, setProjects] = useState(null);
 
   async function findProjects() {
@@ -20,12 +23,19 @@ export const ListProjects = () => {
   }
 
   useEffect(() => {
+    projNav.reset();
     findProjects();
   }, []);
 
   return (
     <div className="container">
       <h1>Projetos</h1>
+
+      <div className="mt-4 mb-4">
+        <Link to={`/projeto/criar`} className="btn btn-primary">
+          Novo Projeto
+        </Link>
+      </div>
 
       <div className="mt-4 row">
         {projects &&

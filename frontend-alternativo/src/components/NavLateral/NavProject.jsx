@@ -3,19 +3,20 @@ import * as Styles from './styles';
 import inicio from '../../assets/icons/inicio.png';
 import dashboards from '../../assets/icons/dashboards_cor.png';
 import membros from '../../assets/icons/membros_cor.png';
+import cadeado from '../../assets/icons/cadeado.png';
+import fluxo from '../../assets/icons/fluxo.png';
 import atividades from '../../assets/icons/atividades_cor.png';
-import ideia from '../../assets/icons/ideia_cor.png';
 import sair from '../../assets/icons/sair.png';
 
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/Auth/useAuth';
 
-export const NavLateral = () => {
+export const NavProject = () => {
   const auth = useAuth();
 
   return (
-    <Styles.Container className="w-100">
-      <Styles.Item>Proj Manager</Styles.Item>
+    <>
+      <Styles.Item>Nav Projeto</Styles.Item>
       <Link to={'/'} style={{ textDecoration: 'none' }}>
         <Styles.Item>
           <Styles.Icon src={inicio} /> Inicio
@@ -40,14 +41,14 @@ export const NavLateral = () => {
       </Link>
       <Link to={'/projetos'} style={{ textDecoration: 'none' }}>
         <Styles.Item>
-          <Styles.Icon src={ideia} />
-          Projetos
+          <Styles.Icon src={fluxo} />
+          Etapas
         </Styles.Item>
       </Link>
       <Link to={'/projeto/criar'} style={{ textDecoration: 'none' }}>
         <Styles.Item>
-          <Styles.Icon src={ideia} />
-          Criar
+          <Styles.Icon src={cadeado} />
+          Gerenciar
         </Styles.Item>
       </Link>
       <Link to={'/'} style={{ textDecoration: 'none' }} onClick={() => auth.logout()}>
@@ -56,6 +57,6 @@ export const NavLateral = () => {
           Sair
         </Styles.Item>
       </Link>
-    </Styles.Container>
+    </>
   );
 };
