@@ -30,8 +30,11 @@ export const Router = () => {
           </div>
           <div className={`${!auth.token ? '' : 'col-lg-10'}`}>
             <Routes>
-              <Route path="/" element={<RouteOptional />}>
+              <Route path="/login" element={<RouteOptional />}>
                 <Route path="/login" element={<Login />} />
+              </Route>
+
+              <Route path="/cadastro" element={<RouteOptional />}>
                 <Route path="/cadastro" element={<Cadastro />} />
               </Route>
 

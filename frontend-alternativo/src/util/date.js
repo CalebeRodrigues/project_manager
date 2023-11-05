@@ -40,3 +40,8 @@ export const verificarPrazo = (data) => {
     return 2;
   }
 };
+
+export const formataData = (data) => {
+  const [ano, mes, dia] = data.split('-');
+  return `${dia}/${mes}/${ano}`;
+};

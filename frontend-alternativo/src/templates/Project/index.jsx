@@ -2,9 +2,33 @@ import { useEffect, useState } from 'react';
 import { EtapaCollapse } from '../../components/EtapaCollapse';
 import { Api } from '../../services/api';
 import * as Styles from './style';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '../../context/Auth/useAuth';
 
 export const Project = () => {
   const [etapas, setEtapas] = useState(null);
+  const [projeto, setProjeto] = useState(null);
+  const auth = useAuth();
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const isMember = async () => {
+    try {
+      await Api.get(`/proj/member/${auth.token}?idProj=${params.id}`);
+    } catch {
+      navigate('/projetos');
+    }
+  };
+
+  const findProject = async () => {
+    try {
+      const resp = await Api.get(`/proj/${params.id}`);
+
+      setProjeto(resp.data);
+    } catch (e) {
+      setProjeto(null);
+    }
+  };
 
   const findEtapas = async () => {
     try {
@@ -17,14 +41,29 @@ export const Project = () => {
   };
 
   useEffect(() => {
+    isMember();
+    findProject();
     findEtapas();
   }, []);
 
   return (
     <Styles.Container className="container p-3">
       <div>
-        <h1 className="mb-1">Projeto nome</h1>
+        {projeto ? (
+          <h1 className="mb-1">{projeto.nome}</h1>
+        ) : (
+          <h1 className="card-title placeholder-glow">
+            <span className="placeholder col-6"></span>
+          </h1>
+        )}
       </div>
+
+      <div className="mt-4 mb-4">
+        <Link to={`/projeto/${params.id}/etapa`} className="btn btn-primary">
+          Criar etapa
+        </Link>
+      </div>
+
       <div className="row mt-4">
         {etapas ? (
           etapas.map((etapa) => {
@@ -38,9 +77,15 @@ export const Project = () => {
               />
             );
           })
-        ) : (
+        ) : projeto ? (
           <div className="container mt-4" style={{ textAlign: 'center' }}>
             <h2>Nenhuma etapa foi criada para este projeto</h2>
+          </div>
+        ) : (
+          <div className="container mt-4" style={{ textAlign: 'center' }}>
+            <h2 className="card-title placeholder-glow">
+              <span className="placeholder col-6"></span>
+            </h2>
           </div>
         )}
       </div>

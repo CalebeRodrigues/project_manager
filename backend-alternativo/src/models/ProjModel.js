@@ -41,6 +41,19 @@ class Proj {
     this.proj = projTemp;
   }
 
+  async isMember(idUser, idProj) {
+    const member = await ProjUserModel.findOne({
+      where: {
+        idUser,
+        idProj
+      }
+    });
+
+    if(!member) throw new Error('Este usuário não é membro do projeto especificado.');
+
+    return true;
+  }
+
   async findOne(id, include=null) {
     const array = [];
     if(include) {

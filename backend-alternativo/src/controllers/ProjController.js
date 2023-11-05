@@ -55,3 +55,15 @@ exports.findAll = async (req, res) => {
     res.status(400).send(e.message);
   }
 };
+
+exports.isMember = async (req, res) => {
+  try {
+    const model = new Proj(req.body);
+
+    res.status(200)
+      .send(await model.isMember(req.params.idUser, req.query.idProj));
+  }
+  catch(e) {
+    res.status(400).send(e.message);
+  }
+};
