@@ -55,14 +55,13 @@ class Proj {
   }
 
   async findOne(id, include=null) {
-    const array = [];
-    if(include) {
-      if(include.contains('members')) array.push(ProjUserModel);
-    }
+    include = (include) ? include : '';
 
-    include = array;
-
-    this.proj = await ProjModel.findOne({ where: { id }, include: include });
+    this.proj = !(include.includes('members')) ?
+      await ProjModel.findOne({ where: { id }}) :
+      await ProjUserModel.findAll({ where: {
+        idProj: id
+      }, include: [UserModel, PerfilModel] });
 
     if(!this.proj) throw new Error('Não existe nenhum projeto atrelado a este ID.');
 

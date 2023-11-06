@@ -4,11 +4,13 @@ import { Api } from '../../services/api';
 import * as Styles from './style';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/Auth/useAuth';
+import { useProject } from '../../context/Project/useProject';
 
 export const Project = () => {
   const [etapas, setEtapas] = useState(null);
   const [projeto, setProjeto] = useState(null);
   const auth = useAuth();
+  const projNav = useProject();
   const params = useParams();
   const navigate = useNavigate();
 
@@ -41,6 +43,7 @@ export const Project = () => {
   };
 
   useEffect(() => {
+    projNav.define(params.id);
     isMember();
     findProject();
     findEtapas();

@@ -3,9 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Api } from '../../services/api';
 import { useAuth } from '../../context/Auth/useAuth';
 import { formataData } from '../../util/date';
+import { useProject } from '../../context/Project/useProject';
 
 export const FormEtapa = () => {
-  const [etapas, setEtapas] = useState(null);
+  const projNav = useProject();
   const [projeto, setProjeto] = useState(null);
   const [isLoading, setLoading] = useState(false);
   const [dataInvalid, setDataInvalid] = useState('');
@@ -32,18 +33,10 @@ export const FormEtapa = () => {
     try {
       const resp = await Api.get(`/proj/${params.id}`);
 
+      console.log(resp);
       setProjeto(resp.data);
     } catch (e) {
       setProjeto(null);
-    }
-  };
-
-  const findEtapasByProject = async () => {
-    try {
-      const resp = await Api.get(`/etapas/${params.id}`);
-      setEtapas(resp.data);
-    } catch (e) {
-      console.log(e.message);
     }
   };
 
@@ -87,7 +80,6 @@ export const FormEtapa = () => {
         dataInicio: '',
         dataFim: '',
       });
-      await findEtapasByProject();
       setLoading(false);
     }
   };
@@ -102,9 +94,9 @@ export const FormEtapa = () => {
   };
 
   useEffect(() => {
+    projNav.define(params.id);
     isMember();
     findProject();
-    findEtapasByProject();
   }, []);
 
   const handleClickCloseMsg = () => {
@@ -121,7 +113,7 @@ export const FormEtapa = () => {
   };
 
   return (
-    <div>
+    <div className="mt-4">
       {projeto ? (
         <h1 className="mb-1">{projeto.nome}</h1>
       ) : (
@@ -245,17 +237,6 @@ export const FormEtapa = () => {
                 )}
               </div>
             </div>
-          </div>
-
-          <div className="mt-4">
-            {etapas &&
-              etapas.map((v) => (
-                <div key={v.id} className="mb-2">
-                  <h5>{v.nome}</h5>
-                  <p>{v.descricao}</p>
-                  <p>{v.dataInicio}</p>
-                </div>
-              ))}
           </div>
         </div>
       ) : (

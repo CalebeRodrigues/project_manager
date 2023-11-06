@@ -10,9 +10,11 @@ import sair from '../../assets/icons/sair.png';
 
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/Auth/useAuth';
+import { useProject } from '../../context/Project/useProject';
 
 export const NavProject = () => {
   const auth = useAuth();
+  const projNav = useProject();
 
   return (
     <>
@@ -27,25 +29,31 @@ export const NavProject = () => {
           <Styles.Icon src={dashboards} /> Dashboards
         </Styles.Item>
       </Link>
-      <Link to={'/members'} style={{ textDecoration: 'none' }}>
+      <Link to={`/members/${projNav.idProj}`} style={{ textDecoration: 'none' }}>
         <Styles.Item>
           <Styles.Icon src={membros} />
           Membros
         </Styles.Item>
       </Link>
-      <Link to={'/atividades'} style={{ textDecoration: 'none' }}>
+      <Link to={`/projeto/${projNav.idProj}`} style={{ textDecoration: 'none' }}>
         <Styles.Item>
           <Styles.Icon src={atividades} />
           Atividades
         </Styles.Item>
       </Link>
-      <Link to={'/projetos'} style={{ textDecoration: 'none' }}>
+      <Link to={`/projeto/${projNav.idProj}/etapa`} style={{ textDecoration: 'none' }}>
         <Styles.Item>
           <Styles.Icon src={fluxo} />
           Etapas
         </Styles.Item>
       </Link>
-      <Link to={'/projeto/criar'} style={{ textDecoration: 'none' }}>
+      <Link to={`/projeto/${projNav.idProj}/etapa/criar`} style={{ textDecoration: 'none' }}>
+        <Styles.Item>
+          <Styles.Icon src={fluxo} />
+          Criar
+        </Styles.Item>
+      </Link>
+      <Link to={'/projeto/config'} style={{ textDecoration: 'none' }}>
         <Styles.Item>
           <Styles.Icon src={cadeado} />
           Gerenciar
