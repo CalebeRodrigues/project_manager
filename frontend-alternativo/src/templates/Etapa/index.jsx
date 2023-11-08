@@ -1,3 +1,4 @@
+import { CardActivity } from '../../components/CardActivity';
 import * as Styles from './style';
 
 export const Etapa = () => {
@@ -7,14 +8,7 @@ export const Etapa = () => {
       <Styles.KanbanContainer>
         <Styles.KanBanItem>
           <h1>Por fazer</h1>
-          <Styles.CardYellow></Styles.CardYellow>
-          <Styles.CardGreen></Styles.CardGreen>
-          <Styles.CardGreen></Styles.CardGreen>
-          <Styles.CardYellow></Styles.CardYellow>
-          <Styles.CardYellow></Styles.CardYellow>
-          <Styles.CardGreen></Styles.CardGreen>
-          <Styles.CardGreen></Styles.CardGreen>
-          <Styles.CardYellow></Styles.CardYellow>
+          <CardActivity />
         </Styles.KanBanItem>
         <Styles.KanBanItem>
           <h1>Fazendo</h1>
