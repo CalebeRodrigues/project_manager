@@ -43,8 +43,8 @@ export const Project = () => {
   };
 
   useEffect(() => {
-    projNav.define(params.id);
     isMember();
+    projNav.define(params.id);
     findProject();
     findEtapas();
   }, []);

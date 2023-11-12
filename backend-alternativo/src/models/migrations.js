@@ -110,6 +110,10 @@ const AtividadeModel = database.define('atividade', {
     type: Sequelize.STRING,
     allowNull: false
   },
+  descricao: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
   prazo: {
     type: Sequelize.STRING,
     allowNull: false

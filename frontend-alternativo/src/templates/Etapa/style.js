@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const KanbanContainer = styled.div`
-  height: 80vh;
-  border: 1px solid #e4e4e4;
+  height: 82vh;
+  border: 1px solid #d2d2d2;
   padding: 2%;
   margin: 0.8%;
   border-radius: 20px;
