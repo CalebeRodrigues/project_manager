@@ -1,11 +1,13 @@
 import { CollapseNewMsg } from '../CollapseNewMsg';
 import { DivMessage } from '../DivMessage';
 
-export const ModalComentarios = () => {
+import P from 'prop-types';
+
+export const ModalComentarios = ({ id, aprovacao = false }) => {
   return (
     <div
       className="modal fade"
-      id="staticBackdrop"
+      id={`comentarios-modal-${id}`}
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabIndex="-1"
@@ -29,15 +31,24 @@ export const ModalComentarios = () => {
             </div>
           </div>
           <div className="modal-footer">
-            <button type="button" className="btn btn-danger" data-bs-dismiss="modal">
-              Rejeitar
-            </button>
-            <button type="button" className="btn btn-success">
-              Aprovar entrega
-            </button>
+            {aprovacao && (
+              <>
+                <button type="button" className="btn btn-danger" data-bs-dismiss="modal">
+                  Rejeitar
+                </button>
+                <button type="button" className="btn btn-success">
+                  Aprovar entrega
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+ModalComentarios.propTypes = {
+  id: P.number,
+  aprovacao: P.bool,
 };

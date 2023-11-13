@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { EtapaCollapse } from '../../components/EtapaCollapse';
 import { Api } from '../../services/api';
 import * as Styles from './style';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../context/Auth/useAuth';
 import { useProject } from '../../context/Project/useProject';
+import { CardEtapa } from '../../components/CardEtapa';
 
 export const Project = () => {
   const [etapas, setEtapas] = useState(null);
@@ -67,15 +67,16 @@ export const Project = () => {
         </Link>
       </div>
 
-      <div className="row mt-4">
+      <div className="row mt-4" style={{ overflowY: 'auto', maxHeight: '70vh' }}>
         {etapas ? (
           etapas.map((etapa) => {
             return (
-              <EtapaCollapse
+              <CardEtapa
                 key={etapa.id}
-                options={{
+                data={{
                   id: etapa.id,
-                  nome: etapa.nome,
+                  title: etapa.nome,
+                  descricao: etapa.descricao,
                 }}
               />
             );

@@ -117,6 +117,10 @@ const AtividadeModel = database.define('atividade', {
   prazo: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  kanban: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
 });
 
@@ -155,7 +159,7 @@ AtividadeModel.belongsTo(UserModel, {
 });
 
 AtividadeModel.hasMany(ComentariosModel, {
-  foreignKey: 'idComentario'
+  foreignKey: 'idAtividade'
 });
 
 ComentariosModel.belongsTo(UserModel, {

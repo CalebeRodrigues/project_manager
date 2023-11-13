@@ -4,6 +4,7 @@ const route = express.Router();
 const UserController = require('./src/controllers/UserController');
 const ProjController = require('./src/controllers/ProjController');
 const EtapaController = require('./src/controllers/EtapaController');
+const AtividadeController = require('./src/controllers/AtividadeController');
 // const AuthController = require('./src/controllers/AuthController');
 // const ActivityController = require('./src/controllers/ActivityController');
 // const MemberController = require('./src/controllers/MemberController');
@@ -40,7 +41,16 @@ route.get('/etapa/:id', EtapaController.findOne);
 
 route.post('/etapa/create', EtapaController.create);
 
-route.put('/etapa/update/id', EtapaController.update);
+route.put('/etapa/update/:id', EtapaController.update);
+
+// Atividades
+route.get('/atividades', AtividadeController.findAll);
+route.get('/atividades/:idEtapa', AtividadeController.findAll);
+route.get('/atividade/:id', AtividadeController.findOne);
+
+route.post('/atividade/create', AtividadeController.create);
+
+route.put('/atividade/update/:id', AtividadeController.update);
 
 
 module.exports = route;
