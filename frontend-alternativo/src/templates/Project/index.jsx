@@ -62,7 +62,7 @@ export const Project = () => {
       </div>
 
       <div className="mt-4 mb-4">
-        <Link to={`/projeto/${params.id}/etapa`} className="btn btn-primary">
+        <Link to={`/projeto/${params.id}/etapa/criar`} className="btn btn-primary">
           Criar etapa
         </Link>
       </div>

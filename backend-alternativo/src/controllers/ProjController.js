@@ -67,3 +67,14 @@ exports.isMember = async (req, res) => {
     res.status(400).send(e.message);
   }
 };
+
+exports.members = async (req, res) => {
+  try {
+    const model = new Proj(req.body);
+
+    res.status(200).send(await model.findMembers(req.params.idProj));
+  }
+  catch(e) {
+    res.status(400).send(e.message);
+  }
+};

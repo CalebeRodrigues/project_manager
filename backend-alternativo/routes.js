@@ -29,6 +29,7 @@ route.delete('/user/delete/:id', UserController.delete);
 route.get('/projs/:idUser', ProjController.findAll);
 route.get('/proj/:id', ProjController.findOne);
 route.get('/proj/member/:idUser', ProjController.isMember);
+route.get('/proj/members/:idProj', ProjController.members);
 
 route.post('/proj/create', ProjController.create);
 

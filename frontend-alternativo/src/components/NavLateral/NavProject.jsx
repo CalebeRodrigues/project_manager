@@ -41,7 +41,7 @@ export const NavProject = () => {
           Atividades
         </Styles.Item>
       </Link>
-      <Link to={`/projeto/${projNav.idProj}/etapa`} style={{ textDecoration: 'none' }}>
+      <Link to={`/projeto/${projNav.idProj}`} style={{ textDecoration: 'none' }}>
         <Styles.Item>
           <Styles.Icon src={fluxo} />
           Etapas

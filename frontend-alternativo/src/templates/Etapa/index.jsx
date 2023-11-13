@@ -14,6 +14,7 @@ export const Etapa = () => {
   const navigate = useNavigate();
 
   const [etapa, setEtapa] = useState(null);
+  const [isShowModalCreate, setShowModalCreate] = useState(false);
 
   const [atividade, setAtividade] = useState({
     do: null,
@@ -31,7 +32,7 @@ export const Etapa = () => {
 
   const findEtapa = async () => {
     try {
-      const resp = await Api.get(`/etapa/1`);
+      const resp = await Api.get(`/etapa/${params.idEtapa}`);
 
       console.log(resp.data);
       setEtapa(resp.data);
@@ -61,7 +62,7 @@ export const Etapa = () => {
 
   const findAtividades = async () => {
     try {
-      const resp = await Api.get(`/atividades/1`);
+      const resp = await Api.get(`/atividades/${params.idEtapa}`);
 
       console.log(organizaKanban(resp.data));
 
@@ -89,6 +90,8 @@ export const Etapa = () => {
           <CreateActivity
             data={{
               idEtapa: etapa.id,
+              isShow: isShowModalCreate,
+              setShow: setShowModalCreate,
             }}
           />
           <Styles.KanbanContainer>

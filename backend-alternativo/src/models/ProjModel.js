@@ -54,6 +54,19 @@ class Proj {
     return true;
   }
 
+  async findMembers(idProj) {
+    const members = await ProjUserModel.findAll({
+      where: { idProj }, include: [{
+        model: UserModel,
+        attributes: ['id', 'nome', 'email']
+      }]
+    });
+
+    if(!members) throw new Error('Não existem membros no projeto referenciado.');
+
+    return members;
+  }
+
   async findOne(id, include=null) {
     include = (include) ? include : '';
 
