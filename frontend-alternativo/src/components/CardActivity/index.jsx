@@ -7,7 +7,8 @@ import P from 'prop-types';
 
 export const CardActivity = ({ data }) => {
   // eslint-disable-next-line
-  const { id, titulo, descricao, prazo, kanban, responsavel } = data;
+  const { id, titulo, descricao, prazo, kanban, responsavel,  } = data;
+
 
   return (
     <>
@@ -22,7 +23,7 @@ export const CardActivity = ({ data }) => {
           </Styles.Atribuido>
         </div>
       </Styles.Container>
-      <ModalComentarios id={id} aprovacao={kanban === 'doing2'} />
+      <ModalComentarios id={id} title={titulo} kanban={kanban} aprovacao={kanban === 'doing2'} />
     </>
   );
 };

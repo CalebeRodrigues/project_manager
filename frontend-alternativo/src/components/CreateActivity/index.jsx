@@ -41,7 +41,10 @@ export const CreateActivity = ({ data }) => {
 
   const createAtividade = async () => {
     try {
-      const resp = await Api.post(`/atividade/create`, input);
+      const resp = await Api.post(`/atividade/create`, {
+        ...input,
+        prazo: '' + new Date(input.prazo),
+      });
 
       console.table(input);
 

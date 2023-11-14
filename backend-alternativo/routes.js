@@ -5,6 +5,7 @@ const UserController = require('./src/controllers/UserController');
 const ProjController = require('./src/controllers/ProjController');
 const EtapaController = require('./src/controllers/EtapaController');
 const AtividadeController = require('./src/controllers/AtividadeController');
+const ComentariosController = require('./src/controllers/ComentariosController');
 // const AuthController = require('./src/controllers/AuthController');
 // const ActivityController = require('./src/controllers/ActivityController');
 // const MemberController = require('./src/controllers/MemberController');
@@ -52,6 +53,15 @@ route.get('/atividade/:id', AtividadeController.findOne);
 route.post('/atividade/create', AtividadeController.create);
 
 route.put('/atividade/update/:id', AtividadeController.update);
+
+// Comentarios
+route.get('/comentarios', ComentariosController.findAll);
+route.get('/comentarios/:idAtividade', ComentariosController.findAll);
+route.get('/comentario/:id', ComentariosController.findOne);
+
+route.post('/comentario/create', ComentariosController.create);
+
+route.put('/comentarios/update/:id', ComentariosController.update);
 
 
 module.exports = route;

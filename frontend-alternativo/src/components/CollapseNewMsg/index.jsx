@@ -1,4 +1,34 @@
-export const CollapseNewMsg = () => {
+import { useState } from 'react';
+
+import P from 'prop-types';
+import { Api } from '../../services/api';
+import { useAuth } from '../../context/Auth/useAuth';
+
+export const CollapseNewMsg = ({ idAtividade, after = null }) => {
+  const [newMsg, setNewMsg] = useState();
+  const auth = useAuth();
+
+  const createMsg = async () => {
+    try {
+      const resp = await Api.post(`/comentario/create`, {
+        conteudo: newMsg,
+        idAtividade: '' + idAtividade,
+        idUser: '' + auth.token,
+      });
+
+      console.log(resp.data);
+      setNewMsg('');
+
+      if (after) after();
+    } catch {
+      setNewMsg('');
+    }
+  };
+
+  const handleClickNewMsg = () => {
+    createMsg();
+  };
+
   return (
     <>
       <p className="d-inline-flex gap-1">
@@ -23,8 +53,8 @@ export const CollapseNewMsg = () => {
               <textarea
                 className="form-control"
                 id="message-text"
-                // value={newMsg}
-                // onChange={(e) => setNewMsg(e.target.value)}
+                value={newMsg}
+                onChange={(e) => setNewMsg(e.target.value)}
               ></textarea>
             </div>
             <button
@@ -33,7 +63,7 @@ export const CollapseNewMsg = () => {
               data-bs-target={`#collapse-new-mensage1`}
               aria-expanded="false"
               aria-controls={`#collapse-new-mensage1`}
-              // onClick={handleClickNewMsg}
+              onClick={handleClickNewMsg}
             >
               Enviar
             </button>
@@ -42,4 +72,9 @@ export const CollapseNewMsg = () => {
       </div>
     </>
   );
+};
+
+CollapseNewMsg.propTypes = {
+  after: P.func,
+  idAtividade: P.number,
 };
