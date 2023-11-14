@@ -47,12 +47,6 @@ export const NavProject = () => {
           Etapas
         </Styles.Item>
       </Link>
-      <Link to={`/projeto/${projNav.idProj}/etapa/criar`} style={{ textDecoration: 'none' }}>
-        <Styles.Item>
-          <Styles.Icon src={fluxo} />
-          Criar
-        </Styles.Item>
-      </Link>
       <Link to={'/projeto/config'} style={{ textDecoration: 'none' }}>
         <Styles.Item>
           <Styles.Icon src={cadeado} />

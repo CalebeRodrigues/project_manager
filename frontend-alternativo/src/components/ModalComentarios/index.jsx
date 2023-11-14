@@ -1,9 +1,39 @@
+import { useEffect, useState } from 'react';
 import { CollapseNewMsg } from '../CollapseNewMsg';
 import { DivMessage } from '../DivMessage';
 
 import P from 'prop-types';
+import { Api } from '../../services/api';
 
-export const ModalComentarios = ({ id, aprovacao = false }) => {
+export const ModalComentarios = ({ id, title, kanban, aprovacao = false }) => {
+  const [comentarios, setComentarios] = useState(null);
+  const [kanbanName, setKanbanName] = useState(kanban);
+
+  const findComentarios = async () => {
+    try {
+      const resp = await Api.get(`/comentarios/${id}`);
+
+      setComentarios(resp.data);
+    } catch (e) {
+      setComentarios(null);
+    }
+  };
+
+  const updateKanbanAtividade = async (kanban) => {
+    try {
+      await Api.put(`/atividade/update/${id}`, {
+        kanban,
+      });
+      setKanbanName(kanban);
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+
+  useEffect(() => {
+    findComentarios();
+  }, []);
+
   return (
     <div
       className="modal fade"
@@ -19,15 +49,26 @@ export const ModalComentarios = ({ id, aprovacao = false }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h1 className="modal-title fs-5" id="staticBackdropLabel">
-              Modal title
+              {title}
             </h1>
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body">
-            <CollapseNewMsg />
+            <CollapseNewMsg idAtividade={id} key={id} after={findComentarios} />
             <div className="mt-4"></div>
-            <div className="p-2" style={{ height: '48vh', overflowY: 'auto' }}>
-              <DivMessage />
+            <div className="p-2" style={{ height: '51vh', overflowY: 'auto' }}>
+              {comentarios &&
+                comentarios.map((obj) => (
+                  <DivMessage
+                    key={obj.id}
+                    options={{
+                      autor: obj.user.nome,
+                      conteudo: obj.conteudo,
+                      data: obj.createdAt,
+                      idAutor: obj.idUser,
+                    }}
+                  />
+                ))}
             </div>
           </div>
           <div className="modal-footer">
@@ -41,6 +82,40 @@ export const ModalComentarios = ({ id, aprovacao = false }) => {
                 </button>
               </>
             )}
+            <div className="btn-group dropup">
+              <button
+                type="button"
+                className="btn btn-secondary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Status:{' '}
+                {kanbanName == 'do'
+                  ? 'Por fazer'
+                  : kanbanName == 'doing'
+                  ? 'Fazendo'
+                  : kanbanName == 'doing2'
+                  ? 'Validação'
+                  : 'Concluido'}
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <button className="dropdown-item" onClick={() => updateKanbanAtividade('do')}>
+                    Por fazer
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => updateKanbanAtividade('doing')}>
+                    Fazendo
+                  </button>
+                </li>
+                <li>
+                  <button className="dropdown-item" onClick={() => updateKanbanAtividade('doing2')}>
+                    Validação
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -50,5 +125,7 @@ export const ModalComentarios = ({ id, aprovacao = false }) => {
 
 ModalComentarios.propTypes = {
   id: P.number,
+  title: P.string,
+  kanban: P.string,
   aprovacao: P.bool,
 };

@@ -92,10 +92,11 @@ const EtapaModel = database.define('etapa', {
   },
   dataInicioReal: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   dataEntrega: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: true
   }
 });
 
