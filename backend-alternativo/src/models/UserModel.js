@@ -101,6 +101,14 @@ class User {
     return users;
   }
 
+  static async findByEmail(email) {
+    const user = await UserModel.findOne({ where: { email }, attributes: ['id', 'nome', 'email'] });
+
+    if(!user) throw new Error('Não existe nenhum usuário atrelado a este e-mail.');
+
+    return user;
+  }
+
   static async findUser(id) {
     const user = await UserModel.findByPk(id);
     if(!user) throw new Error('Não existe nenhum usuário atrelado a este ID.');

@@ -72,7 +72,7 @@ export const CreateActivity = ({ data }) => {
         data-bs-target="#criarAtividadeModal"
         onClick={() => setShow(true)}
       >
-        Criar atividade {idEtapa}
+        Criar atividade
       </button>
 
       <div

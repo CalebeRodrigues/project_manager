@@ -5,7 +5,7 @@ import { DivMessage } from '../DivMessage';
 import P from 'prop-types';
 import { Api } from '../../services/api';
 
-export const ModalComentarios = ({ id, title, kanban, aprovacao = false }) => {
+export const ModalComentarios = ({ id, title, kanban, aprovacao = false, show, setShow }) => {
   const [comentarios, setComentarios] = useState(null);
   const [kanbanName, setKanbanName] = useState(kanban);
 
@@ -34,6 +34,11 @@ export const ModalComentarios = ({ id, title, kanban, aprovacao = false }) => {
     findComentarios();
   }, []);
 
+  useEffect(() => {
+    console.log('teste');
+    if (show) findComentarios();
+  }, [show]);
+
   return (
     <div
       className="modal fade"
@@ -51,7 +56,13 @@ export const ModalComentarios = ({ id, title, kanban, aprovacao = false }) => {
             <h1 className="modal-title fs-5" id="staticBackdropLabel">
               {title}
             </h1>
-            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              onClick={() => setShow(false)}
+            ></button>
           </div>
           <div className="modal-body">
             <CollapseNewMsg idAtividade={id} key={id} after={findComentarios} />
@@ -128,4 +139,6 @@ ModalComentarios.propTypes = {
   title: P.string,
   kanban: P.string,
   aprovacao: P.bool,
+  show: P.bool,
+  setShow: P.func,
 };

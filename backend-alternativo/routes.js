@@ -17,6 +17,7 @@ route.get('/', (req, res) => {
 
 route.get('/users', UserController.findAllUsers);
 route.get('/user/:id', UserController.findUserById);
+route.get('/user/email/:email', UserController.findUser);
 
 route.post('/user/register', UserController.register);
 
@@ -31,8 +32,9 @@ route.get('/projs/:idUser', ProjController.findAll);
 route.get('/proj/:id', ProjController.findOne);
 route.get('/proj/member/:idUser', ProjController.isMember);
 route.get('/proj/members/:idProj', ProjController.members);
-
+    
 route.post('/proj/create', ProjController.create);
+route.post('/proj/member/new/:idUser', ProjController.includeMembers);
 
 route.put('/proj/update/:id', ProjController.update);
 

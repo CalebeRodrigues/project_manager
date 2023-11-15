@@ -41,6 +41,33 @@ class Proj {
     this.proj = projTemp;
   }
 
+  async includeMember (idUser) {
+    const user = await UserModel.findOne({ where: { id: idUser } });
+
+    if(!user) throw new Error('Não foi encontrado nenhum usuário atrelado a este ID.');
+    
+    this.proj = await ProjModel.findOne({ where: { id: this.body.idProj } });
+
+    if(!this.proj) throw new Error('Não foi encontrado nenhum projeto atrelado a este ID.');
+
+    const teste = await ProjUserModel.findOne({ where: {
+      idUser: user.id,
+      idProj: this.proj.id
+    } });
+
+    if (teste) return teste;
+
+    const member = await ProjUserModel.create({
+      idUser: user.id,
+      idProj: this.proj.id,
+      idPerfil: Number(this.body.idPerfil)
+    });
+
+    if(!member) throw new Error('Ocorreu um erro na criação do usuário.');
+
+    return member;
+  }
+
   async isMember(idUser, idProj) {
     const member = await ProjUserModel.findOne({
       where: {

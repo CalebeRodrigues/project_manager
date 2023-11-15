@@ -16,6 +16,8 @@ export const Etapa = () => {
   const [etapa, setEtapa] = useState(null);
   const [isShowModalCreate, setShowModalCreate] = useState(false);
 
+  const [reloadAtividades, setReloadAtividades] = useState(false);
+
   const [atividade, setAtividade] = useState({
     do: null,
     doing: null,
@@ -82,6 +84,13 @@ export const Etapa = () => {
     findAtividades();
   }, []);
 
+  useEffect(() => {
+    if (reloadAtividades) {
+      findAtividades();
+      setReloadAtividades(false);
+    }
+  }, [reloadAtividades]);
+
   return (
     <div className="mt-4 container">
       {etapa && (
@@ -111,6 +120,7 @@ export const Etapa = () => {
                       kanban: obj.kanban,
                       prazo: obj.prazo,
                       responsavel: obj.user.nome,
+                      setReloadAtividade: setReloadAtividades,
                     }}
                   />
                 ))
@@ -135,6 +145,7 @@ export const Etapa = () => {
                       kanban: obj.kanban,
                       prazo: obj.prazo,
                       responsavel: obj.user.nome,
+                      setReloadAtividade: setReloadAtividades,
                     }}
                   />
                 ))
@@ -159,6 +170,7 @@ export const Etapa = () => {
                       kanban: obj.kanban,
                       prazo: obj.prazo,
                       responsavel: obj.user.nome,
+                      setReloadAtividade: setReloadAtividades,
                     }}
                   />
                 ))

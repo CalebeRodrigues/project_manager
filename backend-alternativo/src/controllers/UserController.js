@@ -62,6 +62,17 @@ exports.findAllUsers = async (req, res) => {
   }
 };
 
+exports.findUser = async (req, res) => {
+  try {
+    const user = await User.findByEmail(req.params.email);
+
+    res.status(200).send(user);
+  }
+  catch(e) {
+    res.status(400).send(e.message);
+  }
+};
+
 exports.findUserById = async (req, res) => {
   try {
     const user = await User.findUser(req.params.id);
