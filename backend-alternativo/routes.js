@@ -32,7 +32,7 @@ route.get('/projs/:idUser', ProjController.findAll);
 route.get('/proj/:id', ProjController.findOne);
 route.get('/proj/member/:idUser', ProjController.isMember);
 route.get('/proj/members/:idProj', ProjController.members);
-    
+
 route.post('/proj/create', ProjController.create);
 route.post('/proj/member/new/:idUser', ProjController.includeMembers);
 
@@ -49,8 +49,10 @@ route.put('/etapa/update/:id', EtapaController.update);
 
 // Atividades
 route.get('/atividades', AtividadeController.findAll);
+route.get('/atividades/user/:idUser', AtividadeController.findByUser);
 route.get('/atividades/:idEtapa', AtividadeController.findAll);
 route.get('/atividade/:id', AtividadeController.findOne);
+route.get('/atividade/count/:idEtapa', AtividadeController.countAtividadesByEtapa);
 
 route.post('/atividade/create', AtividadeController.create);
 

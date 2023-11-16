@@ -54,6 +54,16 @@ class Activity {
     return this.atividade;
   }
 
+  async findByUser(idUser) {
+    this.atividade = await AtividadeModel.findAll({ where: {
+      idUser: idUser
+    } });
+
+    if(!this.atividade) throw new Error('Ainda não foram atribuidas atividades para este usuário');
+
+    return this.atividade;
+  }
+
   async findAll(idEtapa = null) {
     this.atividade = 
         (!idEtapa) ? 
@@ -63,6 +73,25 @@ class Activity {
     if(!this.atividade.length > 0) throw new Error('Não existem atividades criadas na base de dados');
 
     return this.atividade;
+  }
+
+  async countAtividadeByEtapa (idEtapa) {
+    const total = await AtividadeModel.count({
+      where: {
+        idEtapa
+      }
+    });
+
+    const andamento = await AtividadeModel.count({
+      where: {
+        idEtapa,
+        kanban: 'do' || 'doing' || 'doing2'
+      }}); 
+
+    return {
+      andamento,
+      total
+    };
   }
 
   // Garante que tudo que vier no formulário seja uma string

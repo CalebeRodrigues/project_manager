@@ -30,12 +30,25 @@ export const ModalComentarios = ({ id, title, kanban, aprovacao = false, show, s
     }
   };
 
+  const validaAtividade = async (resposta) => {
+    try {
+      await Api.put(`/atividade/update/${id}`, {
+        kanban: resposta ? 'does' : 'doing',
+      });
+
+      setKanbanName(resposta ? 'does' : 'doing');
+    } catch (e) {
+      console.log(e.message);
+    } finally {
+      setShow(false);
+    }
+  };
+
   useEffect(() => {
     findComentarios();
   }, []);
 
   useEffect(() => {
-    console.log('teste');
     if (show) findComentarios();
   }, [show]);
 
@@ -85,10 +98,20 @@ export const ModalComentarios = ({ id, title, kanban, aprovacao = false, show, s
           <div className="modal-footer">
             {aprovacao && (
               <>
-                <button type="button" className="btn btn-danger" data-bs-dismiss="modal">
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  data-bs-dismiss="modal"
+                  onClick={() => validaAtividade(false)}
+                >
                   Rejeitar
                 </button>
-                <button type="button" className="btn btn-success">
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  data-bs-dismiss="modal"
+                  onClick={() => validaAtividade(true)}
+                >
                   Aprovar entrega
                 </button>
               </>
