@@ -8,8 +8,10 @@ import validator from 'validator';
 
 export const ListMembers = () => {
   const [members, setMembers] = useState(null);
+  const [perfis, setPerfis] = useState(null);
   const [newMember, setNewMember] = useState('');
   const [userFind, setUserFind] = useState(null);
+  const [inputPerfilSelect, setPerfilInputSelect] = useState(null);
   const [loadingModal, setLoadingModal] = useState(true);
   const [modalOpen, setModalOpen] = useState(true);
   const params = useParams();
@@ -19,9 +21,21 @@ export const ListMembers = () => {
     try {
       const resp = await Api.get(`/proj/${params.id}?include=members`);
 
+      console.log(resp.data);
+
       setMembers(resp.data);
     } catch (e) {
       setMembers(null);
+    }
+  };
+
+  const findPerfis = async () => {
+    try {
+      const resp = await Api.get(`/access/all`);
+
+      setPerfis(resp.data);
+    } catch (e) {
+      setPerfis(null);
     }
   };
 
@@ -32,6 +46,7 @@ export const ListMembers = () => {
       const resp = await Api.get(`/user/email/${newMember}`);
 
       setUserFind(resp.data);
+      findPerfis();
     } catch (e) {
       setUserFind(null);
     } finally {
@@ -43,13 +58,15 @@ export const ListMembers = () => {
     try {
       const resp = await Api.post(`/proj/member/new/${userFind.id}`, {
         idProj: projNav.idProj,
-        idPerfil: '1',
+        idPerfil: inputPerfilSelect,
       });
 
       console.log(resp.data);
       alert('Novo membro incluido com sucesso.');
     } catch (e) {
       console.log(e.message);
+    } finally {
+      setPerfilInputSelect(null);
     }
   };
 
@@ -183,9 +200,18 @@ export const ListMembers = () => {
                         <label htmlFor="perfil-usuario-input" className="form-label">
                           Tipo de acesso
                         </label>
-                        <select className="form-select" id="perfil-usuario-input">
+                        <select
+                          onChange={(e) => setPerfilInputSelect(e.target.value)}
+                          className="form-select"
+                          id="perfil-usuario-input"
+                        >
                           <option selected>Selecione...</option>
-                          <option value={1}>Full Access</option>
+                          {perfis &&
+                            perfis.map((value) => (
+                              <option key={value.id} value={value.id}>
+                                {value.descricao}
+                              </option>
+                            ))}
                         </select>
                       </div>
                     </>

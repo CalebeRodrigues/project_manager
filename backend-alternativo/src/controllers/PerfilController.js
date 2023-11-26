@@ -24,6 +24,18 @@ exports.all = async (req, res) => {
   }
 };
 
+exports.findAccessByUser = async (req, res) => {
+  const model = new Perfil();
+  try {
+    const objAccess = await model.findAccessByUser(req.query.idProj, req.query.idUser);
+
+    res.status(200).send(objAccess);
+  }
+  catch(e) {
+    res.status(400).send(e.message);
+  }
+};
+
 exports.findAllAccess = async (req, res) => {
   const model = new Perfil();
   try {

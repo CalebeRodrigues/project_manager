@@ -11,7 +11,7 @@ export const Manager = () => {
 
       setPerfis(resp.data);
     } catch (e) {
-      console.log(e.message);
+      setPerfis(null);
     }
   };
 
@@ -22,7 +22,7 @@ export const Manager = () => {
   return (
     <div>
       <div className="row">
-        <h1 className="mt-2">Manager controller</h1>
+        <h1 className="mt-3">Lista de perfis</h1>
 
         <div className="container mt-4">
           <div className="accordion p-3" id="accordionExample">

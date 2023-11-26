@@ -71,9 +71,11 @@ route.post('/comentario/create', ComentariosController.create);
 route.put('/comentarios/update/:id', ComentariosController.update);
 
 // Perfil de Acesso
+route.get('/access/user/', PerfilController.findAccessByUser);
 route.get('/access/all', PerfilController.all);
 route.get('/access/allAccess', PerfilController.findAllAccess);
 route.post('/access/create', PerfilController.create);
+
 
 
 module.exports = route;

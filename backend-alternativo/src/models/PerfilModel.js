@@ -1,4 +1,4 @@
-const { PerfilModel, AccessModel, PerfilAccess } = require('./migrations');
+const { PerfilModel, AccessModel, PerfilAccess, ProjUserModel, UserModel, ProjModel } = require('./migrations');
 
 
 class Perfil {
@@ -55,7 +55,40 @@ class Perfil {
         access: objAccess
       };
     }
+  }
 
+  async findAccessByUser(idProj, idUser) {
+    const user = await UserModel.findOne({where: { id: idUser }});
+    const proj = await ProjModel.findOne({ where: { id: idProj } });
+
+    if(!user) throw new Error('Não foi encontrado nenhum usuário atrelado a este ID.');
+    if(!proj) throw new Error('Não foi encontrado nenhum projeto atrelado a este ID.');
+
+    const resp = await ProjUserModel.findOne({
+      where: {
+        idProj,
+        idUser
+      },
+      include: [PerfilModel]
+    });
+
+    if(!resp) throw new Error('Usuário não encontrado no projeto');
+
+    const access = await PerfilAccess.findAll({
+      attributes: [],
+      include: [AccessModel],
+      where: {
+        idPerfil: resp.dataValues.perfil.dataValues.id
+      }
+    });
+
+    const objAccess = [];
+
+    for(let value of access) {
+      objAccess.push(value.dataValues.access.dataValues.code);
+    }
+
+    return objAccess;
   }
 
   async findAllAccess() {
