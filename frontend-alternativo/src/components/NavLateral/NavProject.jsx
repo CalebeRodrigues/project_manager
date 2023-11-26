@@ -9,11 +9,9 @@ import atividades from '../../assets/icons/atividades_cor.png';
 import sair from '../../assets/icons/sair.png';
 
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../context/Auth/useAuth';
 import { useProject } from '../../context/Project/useProject';
 
 export const NavProject = () => {
-  const auth = useAuth();
   const projNav = useProject();
 
   return (
@@ -53,10 +51,10 @@ export const NavProject = () => {
           Gerenciar
         </Styles.Item>
       </Link>
-      <Link to={'/'} style={{ textDecoration: 'none' }} onClick={() => auth.logout()}>
+      <Link to={'/'} style={{ textDecoration: 'none' }}>
         <Styles.Item>
           <Styles.Icon src={sair} />
-          Sair
+          Voltar
         </Styles.Item>
       </Link>
     </>

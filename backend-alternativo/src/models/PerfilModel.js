@@ -1,68 +1,69 @@
-const { EtapaModel, UserModel, AtividadeModel } = require('./migrations');
+const { PerfilModel, AccessModel, PerfilAccess } = require('./migrations');
 
-class Activity {
-  constructor(body) {
+
+class Perfil {
+  constructor(body, access=null) {
     this.body = body;
-    this.atividade = null;
+    this.access = access;
+    this.perfil = null;
   }
 
   async create() {
     this.cleanUp();
 
-    if(!this.body.idEtapa) throw new Error('É necessário uma etapa atrelada a atividade para prosseguir');
+    this.perfil = await PerfilModel.create(this.body);
 
-    if(!this.body.idUser) throw new Error('É necessário inserir um responsável pela atividade para prosseguir');
-
-    const etapa = await EtapaModel.findOne({
-      where: { id: this.body.idEtapa }
-    });
-
-    const user = await UserModel.findOne({
-      where: { id: this.body.idUser }
-    });
-
-    if(!etapa) throw new Error('Não foi encontrado nenhum projeto atrelado a este ID.');
-    if(!user) throw new Error('Não foi encontrado nenhum usuário atrelado a este ID.');
-
-    this.atividade = await AtividadeModel.create(this.body);
+    if(this.access != null) {
+      for(let obj of this.access) {
+        if (await AccessModel.findOne({ where: { code: obj } })) {
+          await PerfilAccess.create({
+            idPerfil: this.perfil.id,
+            acess: obj
+          });
+        }
+      }
+    }
   }
 
-  async update(id) {
-    this.cleanUp();
-
-    const atividadeTemp = await AtividadeModel.findOne({ where: { id } });
-
-    if(!atividadeTemp) throw new Error('Não foi encontrada nenhuma atividade atrelada a este ID');
-
-    await atividadeTemp.update({
-      ...this.body
-    });
-
-    await atividadeTemp.save();
-
-    this.atividade = atividadeTemp;
+  async update() {
   }
 
-  async findOne(id) {
-    this.atividade = await AtividadeModel.findOne({ where: { id }, include: [{
-      model: UserModel,
-      attributes: ['nome']
-    }] });
-
-    if(!this.atividade) throw new Error('Não existe nenhuma atividade atrelada a este ID');
-
-    return this.atividade;
+  async findOne() {
   }
 
-  async findAll(idEtapa = null) {
-    this.atividade = 
-        (!idEtapa) ? 
-          await AtividadeModel.findAll() :
-          await AtividadeModel.findAll({ where: { idEtapa }, include: [{ model: UserModel, attributes: ['nome'] }] });
+  async findAll() {
+    this.perfil = await PerfilModel.findAll();
 
-    if(!this.atividade.length > 0) throw new Error('Não existem atividades criadas na base de dados');
+    if(!this.perfil.length > 0) throw new Error('Não existe nenhum perfil de acesso criado.');
 
-    return this.atividade;
+    for(let obj of this.perfil) {
+      const access = await PerfilAccess.findAll({
+        attributes: [],
+        include: [AccessModel],
+        where: {
+          idPerfil: obj.id
+        }
+      });
+
+      const objAccess = [];
+
+      for(let value of access) {
+        objAccess.push(value.dataValues.access.dataValues.code);
+      }
+      obj.dataValues = {
+        ...obj.dataValues,
+        access: objAccess
+      };
+    }
+
+  }
+
+  async findAllAccess() {
+    const access = await AccessModel.findAll({ attributes: ['code', 'descricao'] });
+
+    if(!access.length > 0) throw new Error('Não existe nenhum code de acesso criado.');
+
+    this.access = access;
   }
 
   // Garante que tudo que vier no formulário seja uma string
@@ -74,14 +75,9 @@ class Activity {
     }
 
     this.body = {
-      titulo: this.body.titulo,
-      descricao: this.body.descricao,
-      prazo: this.body.prazo,
-      kanban: this.body.kanban,
-      idUser: this.body.idUser,
-      idEtapa: this.body.idEtapa
+      descricao: this.body.descricao
     };
   }
 }
 
-exports.Activity = Activity;
+exports.Perfil = Perfil;

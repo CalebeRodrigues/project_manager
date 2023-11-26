@@ -1,8 +1,8 @@
-import P from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useProject } from '../../context/Project/useProject';
 import { useEffect, useState } from 'react';
 import { Api } from '../../services/api';
+import P from 'prop-types';
 
 export const CardEtapa = ({ data }) => {
   const [count, setCount] = useState({ andamento: 0, total: 0 });

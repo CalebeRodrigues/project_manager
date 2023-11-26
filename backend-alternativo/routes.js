@@ -6,14 +6,17 @@ const ProjController = require('./src/controllers/ProjController');
 const EtapaController = require('./src/controllers/EtapaController');
 const AtividadeController = require('./src/controllers/AtividadeController');
 const ComentariosController = require('./src/controllers/ComentariosController');
+const MainController = require('./src/controllers/MainController');
+const PerfilController = require('./src/controllers/PerfilController');
 // const AuthController = require('./src/controllers/AuthController');
-// const ActivityController = require('./src/controllers/ActivityController');
 // const MemberController = require('./src/controllers/MemberController');
-// const PerfilController = require('./src/controllers/PerfilController');
+// const ActivityController = require('./src/controllers/ActivityController');
 
 route.get('/', (req, res) => {
   res.status(200).send('API for project TCC (Manager project)');
 });
+
+route.post('/', MainController.inicializaCenario);
 
 route.get('/users', UserController.findAllUsers);
 route.get('/user/:id', UserController.findUserById);
@@ -66,6 +69,11 @@ route.get('/comentario/:id', ComentariosController.findOne);
 route.post('/comentario/create', ComentariosController.create);
 
 route.put('/comentarios/update/:id', ComentariosController.update);
+
+// Perfil de Acesso
+route.get('/access/all', PerfilController.all);
+route.get('/access/allAccess', PerfilController.findAllAccess);
+route.post('/access/create', PerfilController.create);
 
 
 module.exports = route;

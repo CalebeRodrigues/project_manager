@@ -138,6 +138,34 @@ const ComentariosModel = database.define('comentarios', {
   }
 });
 
+const AccessModel = database.define('access', {
+  code: {
+    primaryKey: true,
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  descricao: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
+const PerfilAccess = database.define('perfil_access', {
+  id: {
+    primaryKey: true,
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    autoIncrement: true
+  }
+});
+
+PerfilAccess.belongsTo(PerfilModel, {
+  foreignKey: 'idPerfil'
+});
+
+PerfilAccess.belongsTo(AccessModel, {
+  foreignKey: 'acess'
+});
 
 ProjUserModel.belongsTo(UserModel, {
   foreignKey: 'idUser'
@@ -182,3 +210,5 @@ exports.PerfilModel = PerfilModel;
 exports.EtapaModel = EtapaModel;
 exports.AtividadeModel = AtividadeModel;
 exports.ComentariosModel = ComentariosModel;
+exports.AccessModel = AccessModel;
+exports.PerfilAccess = PerfilAccess;

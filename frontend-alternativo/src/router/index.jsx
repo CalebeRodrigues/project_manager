@@ -16,6 +16,7 @@ import { Cadastro } from '../templates/Cadastro';
 import { FormEtapa } from '../templates/FormEtapa';
 import { ListMembers } from '../templates/ListMembers';
 import { Etapa } from '../templates/Etapa';
+import { Manager } from '../templates/Manager';
 
 export const Router = () => {
   const auth = useAuth();
@@ -50,6 +51,7 @@ export const Router = () => {
                 <Route path="/projeto/:id" element={<Project />} />
                 <Route path="/projeto/:id/etapa/:idEtapa" element={<Etapa />} />
                 <Route path="/projeto/:id/etapa/criar" element={<FormEtapa />} />
+                <Route path="/projeto/config" element={<Manager />} />
                 <Route path="/members/:id" element={<ListMembers />} />
               </Route>
             </Routes>
