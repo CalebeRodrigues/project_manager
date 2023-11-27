@@ -96,13 +96,15 @@ export const Etapa = () => {
       {etapa && (
         <>
           <h1>Etapa: {etapa.nome}</h1>
-          <CreateActivity
-            data={{
-              idEtapa: etapa.id,
-              isShow: isShowModalCreate,
-              setShow: setShowModalCreate,
-            }}
-          />
+          {projNav.acesso && projNav.acesso.includes('CRIAR_ATIVIDADE') && (
+            <CreateActivity
+              data={{
+                idEtapa: etapa.id,
+                isShow: isShowModalCreate,
+                setShow: setShowModalCreate,
+              }}
+            />
+          )}
           <Styles.KanbanContainer>
             <Styles.KanBanItem>
               <h3 className="mb-3" style={{ textAlign: 'center' }}>
@@ -119,7 +121,7 @@ export const Etapa = () => {
                       descricao: obj.descricao,
                       kanban: obj.kanban,
                       prazo: obj.prazo,
-                      responsavel: obj.user.nome,
+                      responsavel: { id: obj.user.id, nome: obj.user.nome },
                       setReloadAtividade: setReloadAtividades,
                     }}
                   />
@@ -144,7 +146,7 @@ export const Etapa = () => {
                       descricao: obj.descricao,
                       kanban: obj.kanban,
                       prazo: obj.prazo,
-                      responsavel: obj.user.nome,
+                      responsavel: { id: obj.user.id, nome: obj.user.nome },
                       setReloadAtividade: setReloadAtividades,
                     }}
                   />
@@ -169,7 +171,7 @@ export const Etapa = () => {
                       descricao: obj.descricao,
                       kanban: obj.kanban,
                       prazo: obj.prazo,
-                      responsavel: obj.user.nome,
+                      responsavel: { id: obj.user.id, nome: obj.user.nome },
                       setReloadAtividade: setReloadAtividades,
                     }}
                   />

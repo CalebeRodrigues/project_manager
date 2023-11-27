@@ -32,10 +32,14 @@ export const CardEtapa = ({ data }) => {
         <Link to={`/projeto/${project.idProj}/etapa/${id}`} className="btn btn-primary" style={{ marginRight: '1%' }}>
           Visualizar atividades {`${count.total - count.andamento}/${count.total}`}
         </Link>
-        <button className="btn btn-success" style={{ marginRight: '1%' }}>
-          Liberar etapa
-        </button>
-        <button className="btn btn-danger">Finalizar etapa</button>
+        {project.acesso && project.acesso.includes('LIBERAR_ETAPA') && (
+          <button className="btn btn-success" style={{ marginRight: '1%' }}>
+            Liberar etapa
+          </button>
+        )}
+        {project.acesso && project.acesso.includes('FINALIZAR_ETAPA') && (
+          <button className="btn btn-danger">Finalizar etapa</button>
+        )}
       </div>
     </div>
   );

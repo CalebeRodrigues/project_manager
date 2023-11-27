@@ -5,10 +5,12 @@ import { ModalComentarios } from '../ModalComentarios';
 
 import P from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useProject } from '../../context/Project/useProject';
 
 export const CardActivity = ({ data }) => {
   // eslint-disable-next-line
   const { id, titulo, descricao, prazo, kanban, responsavel, setReloadAtividade } = data;
+  const project = useProject();
 
   const [modalComentarios, setModalComentarios] = useState(false);
 
@@ -41,7 +43,7 @@ export const CardActivity = ({ data }) => {
           <p className="card-text">{descricao}</p>
           <Styles.Atribuido>
             <Styles.Image className="img-fluid" src={perfil} alt="" />
-            {responsavel}
+            {responsavel.nome}
           </Styles.Atribuido>
         </div>
       </Styles.Container>
@@ -49,7 +51,8 @@ export const CardActivity = ({ data }) => {
         id={id}
         title={titulo}
         kanban={kanban}
-        aprovacao={kanban === 'doing2'}
+        idResp={responsavel.id}
+        aprovacao={project.acesso ? kanban === 'doing2' && project.acesso.includes('VALIDAR_ATIVIDADE') : false}
         show={modalComentarios}
         setShow={updateKanban}
       />
@@ -64,7 +67,7 @@ CardActivity.propTypes = {
     descricao: P.string,
     prazo: P.string,
     kanban: P.string,
-    responsavel: P.string,
+    responsavel: P.object,
     state: P.array,
   }),
 };

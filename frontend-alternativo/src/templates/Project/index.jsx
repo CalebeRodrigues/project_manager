@@ -61,11 +61,13 @@ export const Project = () => {
         )}
       </div>
 
-      <div className="mt-4 mb-4">
-        <Link to={`/projeto/${params.id}/etapa/criar`} className="btn btn-primary">
-          Criar etapa
-        </Link>
-      </div>
+      {projNav.acesso && projNav.acesso.includes('CRIAR_ETAPA') && (
+        <div className="mt-4 mb-4">
+          <Link to={`/projeto/${params.id}/etapa/criar`} className="btn btn-primary">
+            Criar etapa
+          </Link>
+        </div>
+      )}
 
       <div className="row mt-4" style={{ overflowY: 'auto', maxHeight: '70vh' }}>
         {etapas ? (

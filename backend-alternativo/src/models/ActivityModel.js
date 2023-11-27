@@ -68,7 +68,7 @@ class Activity {
     this.atividade = 
         (!idEtapa) ? 
           await AtividadeModel.findAll() :
-          await AtividadeModel.findAll({ where: { idEtapa }, include: [{ model: UserModel, attributes: ['nome'] }] });
+          await AtividadeModel.findAll({ where: { idEtapa }, include: [{ model: UserModel, attributes: ['id', 'nome'] }] });
 
     if(!this.atividade.length > 0) throw new Error('Não existem atividades criadas na base de dados');
 

@@ -4,10 +4,15 @@ import { DivMessage } from '../DivMessage';
 
 import P from 'prop-types';
 import { Api } from '../../services/api';
+import { useAuth } from '../../context/Auth/useAuth';
+import { useProject } from '../../context/Project/useProject';
 
-export const ModalComentarios = ({ id, title, kanban, aprovacao = false, show, setShow }) => {
+export const ModalComentarios = ({ id, title, idResp, kanban, aprovacao = false, show, setShow }) => {
   const [comentarios, setComentarios] = useState(null);
   const [kanbanName, setKanbanName] = useState(kanban);
+
+  const auth = useAuth();
+  const project = useProject();
 
   const findComentarios = async () => {
     try {
@@ -78,7 +83,14 @@ export const ModalComentarios = ({ id, title, kanban, aprovacao = false, show, s
             ></button>
           </div>
           <div className="modal-body">
-            <CollapseNewMsg idAtividade={id} key={id} after={findComentarios} />
+            {auth.token == idResp ? (
+              <CollapseNewMsg idAtividade={id} key={id} after={findComentarios} />
+            ) : (
+              project.acesso &&
+              project.acesso.includes('RESPONDER_COMENTARIO') && (
+                <CollapseNewMsg idAtividade={id} key={id} after={findComentarios} />
+              )
+            )}
             <div className="mt-4"></div>
             <div className="p-2" style={{ height: '51vh', overflowY: 'auto' }}>
               {comentarios &&
@@ -161,6 +173,7 @@ ModalComentarios.propTypes = {
   id: P.number,
   title: P.string,
   kanban: P.string,
+  idResp: P.number,
   aprovacao: P.bool,
   show: P.bool,
   setShow: P.func,
