@@ -79,6 +79,10 @@ export const Project = () => {
                   id: etapa.id,
                   title: etapa.nome,
                   descricao: etapa.descricao,
+                  dataInicio: etapa.dataInicio,
+                  dataFim: etapa.dataFim,
+                  dataInicioReal: etapa.dataInicioReal,
+                  dataEntrega: etapa.dataEntrega,
                 }}
               />
             );
