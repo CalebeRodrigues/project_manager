@@ -78,6 +78,8 @@ route.post('/access/create', PerfilController.create);
 
 route.post('/access/create', PerfilController.create);
 
+route.put('/access/user/:idPerfil', PerfilController.updateUserAccess);
+
 
 
 module.exports = route;

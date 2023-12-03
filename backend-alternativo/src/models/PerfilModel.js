@@ -25,7 +25,23 @@ class Perfil {
     }
   }
 
-  async update() {
+  async updatePerfilUser(id) {
+    const access = await ProjUserModel.findOne({ where: {
+      idUser: this.body.idUser,
+      idProj: this.body.idProj
+    } });
+
+    if(!access) throw new Error('Não foi encontrado o usuário esperado.');
+
+    const perfil = await PerfilModel.findOne({where: { id }});
+
+    if(!perfil) throw new Error('O perfil solicitado não existe.');
+
+    access.idPerfil = id;
+
+    await access.save();
+
+    this.perfil = access;
   }
 
   async findOne() {

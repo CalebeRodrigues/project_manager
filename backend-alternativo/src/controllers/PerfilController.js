@@ -12,6 +12,18 @@ exports.create = async (req, res) => {
   }
 };
 
+exports.updateUserAccess = async (req, res) => {
+  const model = new Perfil(req.body);
+  try {
+    await model.updatePerfilUser(req.params.idPerfil);
+
+    res.status(200).send(model.perfil);
+  }
+  catch(e) {
+    res.status(400).send(e.message);
+  }
+};
+
 exports.all = async (req, res) => {
   const model = new Perfil();
   try {

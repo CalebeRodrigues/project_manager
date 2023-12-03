@@ -256,6 +256,7 @@ export const ListMembers = () => {
                 email: obj.user.email,
                 nome: obj.user.nome,
                 nivel: obj.perfil.descricao,
+                idUser: obj.user.id,
               }}
             />
           ))}
