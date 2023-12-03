@@ -76,6 +76,8 @@ route.get('/access/all', PerfilController.all);
 route.get('/access/allAccess', PerfilController.findAllAccess);
 route.post('/access/create', PerfilController.create);
 
+route.post('/access/create', PerfilController.create);
+
 
 
 module.exports = route;
