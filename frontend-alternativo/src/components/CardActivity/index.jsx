@@ -7,7 +7,7 @@ import P from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useProject } from '../../context/Project/useProject';
 
-export const CardActivity = ({ data }) => {
+export const CardActivity = ({ data, block = false }) => {
   // eslint-disable-next-line
   const { id, titulo, descricao, prazo, kanban, responsavel, setReloadAtividade } = data;
   const project = useProject();
@@ -55,6 +55,7 @@ export const CardActivity = ({ data }) => {
         aprovacao={project.acesso ? kanban === 'doing2' && project.acesso.includes('VALIDAR_ATIVIDADE') : false}
         show={modalComentarios}
         setShow={updateKanban}
+        block={block}
       />
     </>
   );
@@ -70,4 +71,5 @@ CardActivity.propTypes = {
     responsavel: P.object,
     state: P.array,
   }),
+  block: P.bool,
 };

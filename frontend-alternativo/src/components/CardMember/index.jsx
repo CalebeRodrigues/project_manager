@@ -157,7 +157,7 @@ export const CardMember = ({ data }) => {
             <div className="modal-footer">
               {isCreated ? (
                 <div className="alert alert-success w-100" style={{ textAlign: 'center' }} role="alert">
-                  Perfil criado com sucesso!
+                  Perfil alterado com sucesso!
                 </div>
               ) : (
                 <>

@@ -85,7 +85,7 @@ class Activity {
     const andamento = await AtividadeModel.count({
       where: {
         idEtapa,
-        kanban: 'do' || 'doing' || 'doing2'
+        kanban: 'does'
       }}); 
 
     return {

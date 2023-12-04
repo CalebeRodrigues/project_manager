@@ -28,7 +28,8 @@ class Etapa {
     if(!etapaTemp) throw new Error('Não foi encontrada nenhuma etapa atrelada a este ID');
 
     await etapaTemp.update({
-      ...this.body
+      ...this.body,
+      idProj: etapaTemp.dataValues.idProj
     });
 
     await etapaTemp.save();

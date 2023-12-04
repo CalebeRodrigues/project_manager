@@ -7,7 +7,7 @@ import { Api } from '../../services/api';
 import { useAuth } from '../../context/Auth/useAuth';
 import { useProject } from '../../context/Project/useProject';
 
-export const ModalComentarios = ({ id, title, idResp, kanban, aprovacao = false, show, setShow }) => {
+export const ModalComentarios = ({ id, title, idResp, kanban, aprovacao = false, show, setShow, block }) => {
   const [comentarios, setComentarios] = useState(null);
   const [kanbanName, setKanbanName] = useState(kanban);
 
@@ -83,14 +83,15 @@ export const ModalComentarios = ({ id, title, idResp, kanban, aprovacao = false,
             ></button>
           </div>
           <div className="modal-body">
-            {auth.token == idResp ? (
-              <CollapseNewMsg idAtividade={id} key={id} after={findComentarios} />
-            ) : (
-              project.acesso &&
-              project.acesso.includes('RESPONDER_COMENTARIO') && (
+            {!block &&
+              (auth.token == idResp ? (
                 <CollapseNewMsg idAtividade={id} key={id} after={findComentarios} />
-              )
-            )}
+              ) : (
+                project.acesso &&
+                project.acesso.includes('RESPONDER_COMENTARIO') && (
+                  <CollapseNewMsg idAtividade={id} key={id} after={findComentarios} />
+                )
+              ))}
             <div className="mt-4"></div>
             <div className="p-2" style={{ height: '51vh', overflowY: 'auto' }}>
               {comentarios &&
@@ -108,60 +109,64 @@ export const ModalComentarios = ({ id, title, idResp, kanban, aprovacao = false,
             </div>
           </div>
           <div className="modal-footer">
-            {aprovacao && (
+            {!block && (
               <>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  data-bs-dismiss="modal"
-                  onClick={() => validaAtividade(false)}
-                >
-                  Rejeitar
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-success"
-                  data-bs-dismiss="modal"
-                  onClick={() => validaAtividade(true)}
-                >
-                  Aprovar entrega
-                </button>
+                {aprovacao && (
+                  <>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                      data-bs-dismiss="modal"
+                      onClick={() => validaAtividade(false)}
+                    >
+                      Rejeitar
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-success"
+                      data-bs-dismiss="modal"
+                      onClick={() => validaAtividade(true)}
+                    >
+                      Aprovar entrega
+                    </button>
+                  </>
+                )}
+                <div className="btn-group dropup">
+                  <button
+                    type="button"
+                    className="btn btn-secondary dropdown-toggle"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Status:{' '}
+                    {kanbanName == 'do'
+                      ? 'Por fazer'
+                      : kanbanName == 'doing'
+                      ? 'Fazendo'
+                      : kanbanName == 'doing2'
+                      ? 'Validação'
+                      : 'Concluido'}
+                  </button>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <button className="dropdown-item" onClick={() => updateKanbanAtividade('do')}>
+                        Por fazer
+                      </button>
+                    </li>
+                    <li>
+                      <button className="dropdown-item" onClick={() => updateKanbanAtividade('doing')}>
+                        Fazendo
+                      </button>
+                    </li>
+                    <li>
+                      <button className="dropdown-item" onClick={() => updateKanbanAtividade('doing2')}>
+                        Validação
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </>
             )}
-            <div className="btn-group dropup">
-              <button
-                type="button"
-                className="btn btn-secondary dropdown-toggle"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Status:{' '}
-                {kanbanName == 'do'
-                  ? 'Por fazer'
-                  : kanbanName == 'doing'
-                  ? 'Fazendo'
-                  : kanbanName == 'doing2'
-                  ? 'Validação'
-                  : 'Concluido'}
-              </button>
-              <ul className="dropdown-menu">
-                <li>
-                  <button className="dropdown-item" onClick={() => updateKanbanAtividade('do')}>
-                    Por fazer
-                  </button>
-                </li>
-                <li>
-                  <button className="dropdown-item" onClick={() => updateKanbanAtividade('doing')}>
-                    Fazendo
-                  </button>
-                </li>
-                <li>
-                  <button className="dropdown-item" onClick={() => updateKanbanAtividade('doing2')}>
-                    Validação
-                  </button>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
@@ -177,4 +182,5 @@ ModalComentarios.propTypes = {
   aprovacao: P.bool,
   show: P.bool,
   setShow: P.func,
+  block: P.bool,
 };

@@ -14,6 +14,8 @@ export const Project = () => {
   const params = useParams();
   const navigate = useNavigate();
 
+  const [reloadEtapas, setReloadEtapas] = useState(false);
+
   const isMember = async () => {
     try {
       await Api.get(`/proj/member/${auth.token}?idProj=${params.id}`);
@@ -33,6 +35,7 @@ export const Project = () => {
   };
 
   const findEtapas = async () => {
+    setReloadEtapas(false);
     try {
       const resp = await Api.get('/etapas/1');
 
@@ -48,6 +51,10 @@ export const Project = () => {
     findProject();
     findEtapas();
   }, []);
+
+  useEffect(() => {
+    if (reloadEtapas) findEtapas();
+  }, [reloadEtapas]);
 
   return (
     <Styles.Container className="container p-3">
@@ -83,6 +90,7 @@ export const Project = () => {
                   dataFim: etapa.dataFim,
                   dataInicioReal: etapa.dataInicioReal,
                   dataEntrega: etapa.dataEntrega,
+                  reload: setReloadEtapas,
                 }}
               />
             );

@@ -96,7 +96,7 @@ export const Etapa = () => {
       {etapa && (
         <>
           <h1>Etapa: {etapa.nome}</h1>
-          {projNav.acesso && projNav.acesso.includes('CRIAR_ATIVIDADE') && (
+          {!etapa.dataEntrega.length > 0 && projNav.acesso && projNav.acesso.includes('CRIAR_ATIVIDADE') && (
             <CreateActivity
               data={{
                 idEtapa: etapa.id,
@@ -105,84 +105,121 @@ export const Etapa = () => {
               }}
             />
           )}
-          <Styles.KanbanContainer>
-            <Styles.KanBanItem>
-              <h3 className="mb-3" style={{ textAlign: 'center' }}>
-                Por fazer
-              </h3>
 
-              {atividade.do ? (
-                atividade.do.map((obj) => (
-                  <CardActivity
-                    key={obj.id}
-                    data={{
-                      id: obj.id,
-                      titulo: obj.titulo,
-                      descricao: obj.descricao,
-                      kanban: obj.kanban,
-                      prazo: obj.prazo,
-                      responsavel: { id: obj.user.id, nome: obj.user.nome },
-                      setReloadAtividade: setReloadAtividades,
-                    }}
-                  />
-                ))
-              ) : (
-                <div className="mt-4" style={{ textAlign: 'center' }}>
-                  <h5>Não existe nenhuma tarefa na lista por fazer</h5>
-                </div>
-              )}
-            </Styles.KanBanItem>
-            <Styles.KanBanItem>
-              <h3 className="mb-3" style={{ textAlign: 'center' }}>
-                Fazendo
-              </h3>
-              {atividade.doing ? (
-                atividade.doing.map((obj) => (
-                  <CardActivity
-                    key={obj.id}
-                    data={{
-                      id: obj.id,
-                      titulo: obj.titulo,
-                      descricao: obj.descricao,
-                      kanban: obj.kanban,
-                      prazo: obj.prazo,
-                      responsavel: { id: obj.user.id, nome: obj.user.nome },
-                      setReloadAtividade: setReloadAtividades,
-                    }}
-                  />
-                ))
-              ) : (
-                <div className="mt-4" style={{ textAlign: 'center' }}>
-                  <h5>Não existe nenhuma tarefa na lista fazendo</h5>
-                </div>
-              )}
-            </Styles.KanBanItem>
-            <Styles.KanBanItem>
-              <h3 className="mb-3" style={{ textAlign: 'center' }}>
-                Finalizado
-              </h3>
-              {atividade.does ? (
-                atividade.does.map((obj) => (
-                  <CardActivity
-                    key={obj.id}
-                    data={{
-                      id: obj.id,
-                      titulo: obj.titulo,
-                      descricao: obj.descricao,
-                      kanban: obj.kanban,
-                      prazo: obj.prazo,
-                      responsavel: { id: obj.user.id, nome: obj.user.nome },
-                      setReloadAtividade: setReloadAtividades,
-                    }}
-                  />
-                ))
-              ) : (
-                <div className="mt-4" style={{ textAlign: 'center' }}>
-                  <h5>Não existe nenhuma tarefa na lista de concluidas</h5>
-                </div>
-              )}
-            </Styles.KanBanItem>
-          </Styles.KanbanContainer>
+          {!etapa.dataEntrega.length > 0 ? (
+            <Styles.KanbanContainer>
+              <Styles.KanBanItem>
+                <h3 className="mb-3" style={{ textAlign: 'center' }}>
+                  Por fazer
+                </h3>
+
+                {atividade.do ? (
+                  atividade.do.map((obj) => (
+                    <CardActivity
+                      key={obj.id}
+                      data={{
+                        id: obj.id,
+                        titulo: obj.titulo,
+                        descricao: obj.descricao,
+                        kanban: obj.kanban,
+                        prazo: obj.prazo,
+                        responsavel: { id: obj.user.id, nome: obj.user.nome },
+                        setReloadAtividade: setReloadAtividades,
+                      }}
+                    />
+                  ))
+                ) : (
+                  <div className="mt-4" style={{ textAlign: 'center' }}>
+                    <h5>Não existe nenhuma tarefa na lista por fazer</h5>
+                  </div>
+                )}
+              </Styles.KanBanItem>
+              <Styles.KanBanItem>
+                <h3 className="mb-3" style={{ textAlign: 'center' }}>
+                  Fazendo
+                </h3>
+                {atividade.doing ? (
+                  atividade.doing.map((obj) => (
+                    <CardActivity
+                      key={obj.id}
+                      data={{
+                        id: obj.id,
+                        titulo: obj.titulo,
+                        descricao: obj.descricao,
+                        kanban: obj.kanban,
+                        prazo: obj.prazo,
+                        responsavel: { id: obj.user.id, nome: obj.user.nome },
+                        setReloadAtividade: setReloadAtividades,
+                      }}
+                    />
+                  ))
+                ) : (
+                  <div className="mt-4" style={{ textAlign: 'center' }}>
+                    <h5>Não existe nenhuma tarefa na lista fazendo</h5>
+                  </div>
+                )}
+              </Styles.KanBanItem>
+              <Styles.KanBanItem>
+                <h3 className="mb-3" style={{ textAlign: 'center' }}>
+                  Finalizado
+                </h3>
+                {atividade.does ? (
+                  atividade.does.map((obj) => (
+                    <CardActivity
+                      key={obj.id}
+                      data={{
+                        id: obj.id,
+                        titulo: obj.titulo,
+                        descricao: obj.descricao,
+                        kanban: obj.kanban,
+                        prazo: obj.prazo,
+                        responsavel: { id: obj.user.id, nome: obj.user.nome },
+                        setReloadAtividade: setReloadAtividades,
+                      }}
+                    />
+                  ))
+                ) : (
+                  <div className="mt-4" style={{ textAlign: 'center' }}>
+                    <h5>Não existe nenhuma tarefa na lista de concluidas</h5>
+                  </div>
+                )}
+              </Styles.KanBanItem>
+            </Styles.KanbanContainer>
+          ) : (
+            <div
+              className="container"
+              style={{
+                margin: '0.8%',
+                marginRight: '1.5%',
+                border: '1px solid #d2d2d2',
+                borderRadius: '10px',
+                padding: '2%',
+                height: '75vh',
+                maxHeight: '75vh',
+              }}
+            >
+              <div className="row">
+                {atividade.does &&
+                  atividade.does.map((obj) => (
+                    <div key={obj.id} className="col-6">
+                      <CardActivity
+                        key={obj.id}
+                        data={{
+                          id: obj.id,
+                          titulo: obj.titulo,
+                          descricao: obj.descricao,
+                          kanban: obj.kanban,
+                          prazo: obj.prazo,
+                          responsavel: { id: obj.user.id, nome: obj.user.nome },
+                          setReloadAtividade: setReloadAtividades,
+                        }}
+                        block={true}
+                      />
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>

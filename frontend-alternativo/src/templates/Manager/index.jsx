@@ -37,7 +37,7 @@ export const Manager = () => {
           </button>
         </div>
 
-        <div className="container mt-4">
+        <div className="container mt-4" style={{ maxHeight: '75vh', border: '1px solid #f7f7f7', overflowY: 'auto' }}>
           <div className="accordion p-3" id="accordionExample">
             {perfis &&
               perfis.map((perfil) => (
