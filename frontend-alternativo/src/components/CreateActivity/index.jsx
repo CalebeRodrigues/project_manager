@@ -8,6 +8,8 @@ export const CreateActivity = ({ data }) => {
 
   const [members, setMembers] = useState(null);
 
+  const [criado, setCriado] = useState(false);
+
   const proj = useProject();
 
   const [input, setInput] = useState({
@@ -41,18 +43,28 @@ export const CreateActivity = ({ data }) => {
 
   const createAtividade = async () => {
     try {
-      const resp = await Api.post(`/atividade/create`, {
+      await Api.post(`/atividade/create`, {
         ...input,
         prazo: '' + new Date(input.prazo),
       });
 
-      console.table(input);
-
-      console.log(resp.data);
-      alert('Deu certooooooo');
+      clearCampos();
+      setCriado(true);
     } catch (e) {
       console.log(e.message);
     }
+  };
+
+  const clearCampos = () => {
+    setInput({
+      titulo: '',
+      descricao: '',
+      prazo: '',
+      idEtapa: '' + idEtapa,
+      kanban: 'do',
+      idUser: '1',
+    });
+    setCriado(false);
   };
 
   useEffect(() => {
@@ -93,7 +105,10 @@ export const CreateActivity = ({ data }) => {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-                onClick={() => setShow(false)}
+                onClick={() => {
+                  setShow(false);
+                  clearCampos();
+                }}
               ></button>
             </div>
             <div className="modal-body">
@@ -155,17 +170,25 @@ export const CreateActivity = ({ data }) => {
               </div>
             </div>
             <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-                onClick={() => setShow(false)}
-              >
-                Fechar
-              </button>
-              <button type="button" className="btn btn-primary" onClick={handleClick}>
-                Criar atividade
-              </button>
+              {!criado ? (
+                <>
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                    onClick={() => setShow(false)}
+                  >
+                    Fechar
+                  </button>
+                  <button type="button" className="btn btn-primary" onClick={handleClick}>
+                    Criar atividade
+                  </button>
+                </>
+              ) : (
+                <div className="alert alert-success w-100" style={{ textAlign: 'center' }} role="alert">
+                  Atividade criada com sucesso!
+                </div>
+              )}
             </div>
           </div>
         </div>

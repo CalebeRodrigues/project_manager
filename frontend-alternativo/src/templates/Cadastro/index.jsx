@@ -15,6 +15,7 @@ export const Cadastro = () => {
 
       console.table(response.data);
       alert('Cadastrado com sucesso!');
+      setValues({ nome: '', email: '', senha: '' });
     } catch (e) {
       console.log(e.message);
     } finally {

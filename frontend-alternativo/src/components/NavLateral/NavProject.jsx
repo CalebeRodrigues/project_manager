@@ -5,7 +5,6 @@ import dashboards from '../../assets/icons/dashboards_cor.png';
 import membros from '../../assets/icons/membros_cor.png';
 import cadeado from '../../assets/icons/cadeado.png';
 import fluxo from '../../assets/icons/fluxo.png';
-import atividades from '../../assets/icons/atividades_cor.png';
 import sair from '../../assets/icons/sair.png';
 
 import { Link } from 'react-router-dom';
@@ -31,12 +30,6 @@ export const NavProject = () => {
         <Styles.Item>
           <Styles.Icon src={membros} />
           Membros
-        </Styles.Item>
-      </Link>
-      <Link to={`/projeto/${projNav.idProj}`} style={{ textDecoration: 'none' }}>
-        <Styles.Item>
-          <Styles.Icon src={atividades} />
-          Atividades
         </Styles.Item>
       </Link>
       <Link to={`/projeto/${projNav.idProj}`} style={{ textDecoration: 'none' }}>
