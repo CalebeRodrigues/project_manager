@@ -17,6 +17,7 @@ import { FormEtapa } from '../templates/FormEtapa';
 import { ListMembers } from '../templates/ListMembers';
 import { Etapa } from '../templates/Etapa';
 import { Manager } from '../templates/Manager';
+import { Dashboards } from '../templates/Dashboards';
 
 export const Router = () => {
   const auth = useAuth();
@@ -42,8 +43,8 @@ export const Router = () => {
               </Route>
 
               <Route path="/" element={<RoutePrivate />}>
-                <Route path="/" element={<App />} />
-                <Route path="/dashboards" element={<App />} />
+                <Route path="/" element={<ListProjects />} />
+                <Route path="/dashboards/:id" element={<Dashboards />} />
                 <Route path="/members" element={<App />} />
                 <Route path="/atividades" element={<App />} />
                 <Route path="/projetos" element={<ListProjects />} />

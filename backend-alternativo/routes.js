@@ -53,6 +53,7 @@ route.put('/etapa/update/:id', EtapaController.update);
 // Atividades
 route.get('/atividades', AtividadeController.findAll);
 route.get('/atividades/user/:idUser', AtividadeController.findByUser);
+route.get('/atividades/proj/:idProj', AtividadeController.findAllByProj);
 route.get('/atividades/:idEtapa', AtividadeController.findAll);
 route.get('/atividade/:id', AtividadeController.findOne);
 route.get('/atividade/count/:idEtapa', AtividadeController.countAtividadesByEtapa);

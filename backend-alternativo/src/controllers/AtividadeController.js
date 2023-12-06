@@ -65,6 +65,19 @@ exports.findByUser = async (req, res) => {
   }
 };
 
+exports.findAllByProj = async (req, res) => {
+  try {
+    const model = new Activity();
+
+    await model.findAtividadeByProject(req.params.idProj);
+
+    res.status(200).send(model.atividade);
+  }
+  catch(e) {
+    res.status(400).send(e.message);
+  }
+};
+
 exports.countAtividadesByEtapa = async (req, res) => {
   try {
     const model = new Activity(req.body);

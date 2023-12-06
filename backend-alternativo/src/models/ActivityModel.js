@@ -1,4 +1,4 @@
-const { EtapaModel, UserModel, AtividadeModel } = require('./migrations');
+const { EtapaModel, UserModel, AtividadeModel, ProjModel } = require('./migrations');
 
 class Activity {
   constructor(body) {
@@ -92,6 +92,18 @@ class Activity {
       andamento,
       total
     };
+  }
+
+  async findAtividadeByProject(idProj) {
+    this.atividade = await EtapaModel.findAll({
+      where: {
+        idProj
+      },
+      include: [{
+        model: AtividadeModel,
+        include: [UserModel]
+      }]
+    });
   }
 
   // Garante que tudo que vier no formulário seja uma string

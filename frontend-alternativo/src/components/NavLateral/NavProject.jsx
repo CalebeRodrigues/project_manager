@@ -16,13 +16,13 @@ export const NavProject = () => {
 
   return (
     <>
-      <Styles.Item>Nav Projeto</Styles.Item>
+      <Styles.Item>Projeto</Styles.Item>
       <Link to={'/'} style={{ textDecoration: 'none' }}>
         <Styles.Item>
           <Styles.Icon src={inicio} /> Inicio
         </Styles.Item>
       </Link>
-      <Link to={'/dashboards'} style={{ textDecoration: 'none' }}>
+      <Link to={`/dashboards/${projNav.idProj}`} style={{ textDecoration: 'none' }}>
         <Styles.Item>
           <Styles.Icon src={dashboards} /> Dashboards
         </Styles.Item>
