@@ -38,7 +38,6 @@ exports.findOne = async (req, res) => {
   catch(e) {
     res.status(400).send(e.message);
   }
-  res.status(200).send(includes);
 };
 
 exports.findAll = async (req, res) => {
