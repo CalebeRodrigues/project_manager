@@ -2,6 +2,7 @@ import P from 'prop-types';
 import { Api } from '../../services/api';
 import { useRef, useState } from 'react';
 import { useAuth } from '../../context/Auth/useAuth';
+import { useParams } from 'react-router-dom';
 
 export const CardMember = ({ data }) => {
   const [perfis, setPerfis] = useState(null);
@@ -11,6 +12,8 @@ export const CardMember = ({ data }) => {
 
   const [isCreated, setIsCreated] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const params = useParams();
 
   const selectControl = useRef(null);
 
@@ -47,7 +50,7 @@ export const CardMember = ({ data }) => {
       try {
         await Api.put(`/access/user/${idPerfil}`, {
           idUser: data.idUser,
-          idProj: '1',
+          idProj: params.id,
         });
 
         data.nivel = selectControl.current.selectedOptions[0].textContent;

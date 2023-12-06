@@ -14,6 +14,8 @@ export const Project = () => {
   const params = useParams();
   const navigate = useNavigate();
 
+  const [encerravel, setEncerravel] = useState(false);
+
   const [reloadEtapas, setReloadEtapas] = useState(false);
 
   const isMember = async () => {
@@ -37,13 +39,38 @@ export const Project = () => {
   const findEtapas = async () => {
     setReloadEtapas(false);
     try {
-      const resp = await Api.get('/etapas/1');
+      const resp = await Api.get(`/etapas/${params.id}`);
 
       setEtapas(resp.data);
+
+      const result = isFinalizavel(resp.data);
+
+      setEncerravel(result);
     } catch (e) {
       setEtapas(null);
     }
   };
+
+  const isFinalizavel = (etapa) => {
+    if (!etapa) return false;
+
+    const total = etapa.length;
+
+    let finalizadas = 0;
+
+    for (let value of etapa) {
+      if (value.dataEntrega.length > 0) finalizadas++;
+      console.log(value);
+    }
+    console.log('Total', total, 'Finalizados', finalizadas);
+
+    return total == finalizadas;
+  };
+
+  // const finalizarProjeto = async () => {
+  //   try {
+  //   } catch (e) {}
+  // };
 
   useEffect(() => {
     isMember();
@@ -60,7 +87,7 @@ export const Project = () => {
     <Styles.Container className="container p-3">
       <div>
         {projeto ? (
-          <h1 className="mb-1">{projeto.nome}</h1>
+          <h1 className="mb-2">{projeto.nome}</h1>
         ) : (
           <h1 className="card-title placeholder-glow">
             <span className="placeholder col-6"></span>
@@ -68,13 +95,21 @@ export const Project = () => {
         )}
       </div>
 
-      {projNav.acesso && projNav.acesso.includes('CRIAR_ETAPA') && (
-        <div className="mt-4 mb-4">
-          <Link to={`/projeto/${params.id}/etapa/criar`} className="btn btn-primary">
-            Criar etapa
-          </Link>
-        </div>
-      )}
+      <div>
+        {projNav.acesso && projNav.acesso.includes('CRIAR_ETAPA') && projeto && projeto.status != 'Concluido' && (
+          <span className="mt-4 mb-4" style={{ marginRight: '1%' }}>
+            <Link to={`/projeto/${params.id}/etapa/criar`} className="btn btn-primary">
+              Criar etapa
+            </Link>
+          </span>
+        )}
+
+        {encerravel && (
+          <span className="mt-4 mb-4">
+            <button className="btn btn-danger">Finalizar projeto</button>
+          </span>
+        )}
+      </div>
 
       <div className="row mt-4" style={{ overflowY: 'auto', maxHeight: '70vh' }}>
         {etapas ? (

@@ -66,14 +66,18 @@ export const CardEtapa = ({ data }) => {
 
   return (
     <div className="card mb-4" style={{ width: '98%' }}>
-      <h4 className="card-header">Etapa #{id}</h4>
+      <h4 className="card-header">Etapa</h4>
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
         <p className="card-text">{descricao}</p>
         <Link
           to={`/projeto/${project.idProj}/etapa/${id}`}
           className={`btn btn-primary ${
-            project.acesso && project.acesso.includes('LIBERAR_ETAPA') ? '' : active ? '' : 'disabled'
+            (project.acesso && project.acesso.includes('LIBERAR_ETAPA')) || dataInicioReal.length > 0
+              ? ''
+              : active
+              ? ''
+              : 'disabled'
           }`}
           style={{ marginRight: '1%' }}
         >
