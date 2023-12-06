@@ -17,6 +17,8 @@ export const ListMembers = () => {
   const params = useParams();
   const projNav = useProject();
 
+  const [criado, setCriado] = useState(false);
+
   const findUserProj = async () => {
     try {
       const resp = await Api.get(`/proj/${params.id}?include=members`);
@@ -56,13 +58,12 @@ export const ListMembers = () => {
 
   const includeMember = async () => {
     try {
-      const resp = await Api.post(`/proj/member/new/${userFind.id}`, {
+      await Api.post(`/proj/member/new/${userFind.id}`, {
         idProj: projNav.idProj,
         idPerfil: inputPerfilSelect,
       });
 
-      console.log(resp.data);
-      alert('Novo membro incluido com sucesso.');
+      setCriado(true);
     } catch (e) {
       console.log(e.message);
     } finally {
@@ -131,6 +132,7 @@ export const ListMembers = () => {
                       onClick={() => {
                         setUserFind(null);
                         setModalOpen(false);
+                        setCriado(false);
                       }}
                     ></button>
                   </div>
@@ -225,17 +227,25 @@ export const ListMembers = () => {
                   <div className="modal-footer">
                     {userFind && (
                       <>
-                        <button
-                          type="button"
-                          className="btn btn-danger"
-                          data-bs-dismiss="modal"
-                          onClick={() => setModalOpen(false)}
-                        >
-                          Cancelar
-                        </button>
-                        <button type="button" className="btn btn-success" onClick={includeMember}>
-                          Incluir membro
-                        </button>
+                        {!criado ? (
+                          <>
+                            <button
+                              type="button"
+                              className="btn btn-danger"
+                              data-bs-dismiss="modal"
+                              onClick={() => setModalOpen(false)}
+                            >
+                              Cancelar
+                            </button>
+                            <button type="button" className="btn btn-success" onClick={includeMember}>
+                              Incluir membro
+                            </button>
+                          </>
+                        ) : (
+                          <div className="alert alert-success w-100" style={{ textAlign: 'center' }} role="alert">
+                            Membro adicionado com sucesso!
+                          </div>
+                        )}
                       </>
                     )}
                   </div>

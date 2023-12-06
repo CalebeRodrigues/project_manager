@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 export const Login = () => {
   const [values, setValues] = useState({ email: '', pass: '' });
   const auth = useAuth();
-  // const [isNotLogin, setLoginStatus] = useState(false);
+  const [errorLogin, setErrorLogin] = useState(false);
   const [loginRequest, setLoginRequest] = useState(false);
 
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ export const Login = () => {
       return navigate('/');
     } catch (e) {
       // setLoginStatus(true);
+      setErrorLogin(true);
     } finally {
       setLoginRequest(false);
     }
@@ -64,7 +65,7 @@ export const Login = () => {
                     <input
                       name="pass"
                       type="password"
-                      className="form-control"
+                      className={`form-control ${errorLogin ? 'is-invalid' : ''}`}
                       value={values.pass}
                       onChange={onChange}
                     />

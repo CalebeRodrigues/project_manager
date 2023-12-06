@@ -9,6 +9,10 @@ export const KanbanContainer = styled.div`
   overflow-x: auto;
   display: grid;
   grid-template-columns: 50% 50% 50%;
+
+  @media screen and (max-width: 610px) {
+    grid-template-columns: 100% 100% 100%;
+  }
 `;
 
 export const KanBanItem = styled.div`

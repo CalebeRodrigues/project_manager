@@ -91,6 +91,10 @@ export const Etapa = () => {
     }
   }, [reloadAtividades]);
 
+  useEffect(() => {
+    if (!isShowModalCreate) findAtividades();
+  }, [isShowModalCreate]);
+
   return (
     <div className="mt-4 container">
       {etapa && (

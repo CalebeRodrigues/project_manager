@@ -24,7 +24,7 @@ export const Manager = () => {
 
   return (
     <div>
-      <div className="row">
+      <div className="row container">
         <h1 className="mt-3">Lista de perfis</h1>
         <div className="col">
           <button
