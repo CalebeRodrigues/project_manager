@@ -26,5 +26,10 @@ exports.accessMock = [
   {
     code: 'ADICIONAR_MEMBRO',
     descricao: 'Adicionar membro'
-  }
+  },
+  
+  {
+    code: 'FINALIZAR_PROJETO',
+    descricao: 'Finalizar projeto'
+  },
 ];
