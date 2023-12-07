@@ -3,6 +3,7 @@ import { Api } from '../../services/api';
 import { useRef, useState } from 'react';
 import { useAuth } from '../../context/Auth/useAuth';
 import { useParams } from 'react-router-dom';
+import { useProject } from '../../context/Project/useProject';
 
 export const CardMember = ({ data }) => {
   const [perfis, setPerfis] = useState(null);
@@ -18,6 +19,7 @@ export const CardMember = ({ data }) => {
   const selectControl = useRef(null);
 
   const auth = useAuth();
+  const proj = useProject();
 
   const findPerfis = async () => {
     try {
@@ -69,11 +71,11 @@ export const CardMember = ({ data }) => {
 
   return (
     <div className="card mb-4">
-      <div className="card-header">{data.email}</div>
+      <div className="card-header">Usuário</div>
       <div className="card-body">
         <h5 className="card-title">{data.nome}</h5>
         <p className="card-text">
-          Atividades atribuidas: 20/50
+          {data.email}
           {/* <div
             className="progress"
             role="progressbar"
@@ -85,15 +87,17 @@ export const CardMember = ({ data }) => {
             <div className="progress-bar progress-bar-striped progress-bar-animated" style={{ width: '75%' }}></div>
           </div> */}
         </p>
-        <a
-          href="#"
-          className="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target={`#confirmaAlteracaoPerfil${data.id}`}
-          onClick={handleClick}
-        >
-          Editar
-        </a>
+        {proj.acesso && proj.acesso.includes('ADICIONAR_MEMBRO') && (
+          <a
+            href="#"
+            className="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target={`#confirmaAlteracaoPerfil${data.id}`}
+            onClick={handleClick}
+          >
+            Editar
+          </a>
+        )}
       </div>
       <div className="card-footer text-body-secondary text-center">{data.nivel}</div>
 
