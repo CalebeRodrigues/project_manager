@@ -67,10 +67,18 @@ export const Project = () => {
     return total == finalizadas;
   };
 
-  // const finalizarProjeto = async () => {
-  //   try {
-  //   } catch (e) {}
-  // };
+  const finalizarProjeto = async () => {
+    try {
+      await Api.put(`/proj/update/${projNav.idProj}`, {
+        status: 'Concluído',
+      });
+
+      await findProject();
+      await findEtapas();
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
 
   useEffect(() => {
     isMember();
@@ -96,7 +104,7 @@ export const Project = () => {
       </div>
 
       <div>
-        {projNav.acesso && projNav.acesso.includes('CRIAR_ETAPA') && projeto && projeto.status != 'Concluido' && (
+        {projNav.acesso && projNav.acesso.includes('CRIAR_ETAPA') && projeto && projeto.status != 'Concluído' && (
           <span className="mt-4 mb-4" style={{ marginRight: '1%' }}>
             <Link to={`/projeto/${params.id}/etapa/criar`} className="btn btn-primary">
               Criar etapa
@@ -104,11 +112,48 @@ export const Project = () => {
           </span>
         )}
 
-        {encerravel && (
-          <span className="mt-4 mb-4">
-            <button className="btn btn-danger">Finalizar projeto</button>
-          </span>
-        )}
+        {projeto &&
+          projeto.status != 'Concluído' &&
+          encerravel &&
+          projNav.acesso &&
+          projNav.acesso.includes('FINALIZAR_PROJETO') && (
+            <>
+              <span className="mt-4 mb-4">
+                <button className="btn btn-danger" data-bs-toggle="modal" data-bs-target="#finalizarProjetoModal">
+                  Finalizar projeto
+                </button>
+              </span>
+
+              {/* Modal */}
+              <div
+                className="modal fade"
+                id="finalizarProjetoModal"
+                tabIndex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div className="modal-dialog">
+                  <div className="modal-content">
+                    <div className="modal-header">
+                      <h5 className="modal-title">Projeto</h5>
+                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                      <p>Deseja prosseguir com o encerramento deste projeto?</p>
+                    </div>
+                    <div className="modal-footer" data-bs-dismiss="modal">
+                      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
+                        Não
+                      </button>
+                      <button type="button" className="btn btn-primary" onClick={finalizarProjeto}>
+                        Sim
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
       </div>
 
       <div className="row mt-4" style={{ overflowY: 'auto', maxHeight: '70vh' }}>
